@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { forwardRef } from "react";
 import {
   Button,
   Container,
+  Dropdown,
   Form,
   Nav,
   Navbar,
@@ -18,9 +19,16 @@ const expand = "md";
 export default function NavbarComponent() {
   return (
     <>
-      <Navbar bg="light" expand={expand} className="mb-3">
+      <Navbar
+        bg="light"
+        expand={expand}
+        className="mb-3 sticky-top"
+        style={{ boxShadow: "rgb(118 118 118) -1px -2px 7px 2px" }}
+      >
         <Container fluid>
-          <Navbar.Brand href="#">{AppConfig().app.name}</Navbar.Brand>
+          <Navbar.Brand className="navbar-brand" href="/">
+            {AppConfig().app.name}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-${expand}`}
@@ -57,7 +65,7 @@ export default function NavbarComponent() {
                       color: "white",
                     }}
                   >
-                    <FaSearch />
+                    <FaSearch style={{ marginBottom: "5px" }} />
                   </button>
                 </Form>
               </div>
@@ -73,15 +81,17 @@ export default function NavbarComponent() {
                   />
                   My products
                 </Nav.Link>
-                <Nav.Link href="/profile">
+
+                <Nav.Link>
                   <BsPerson style={{ marginRight: "5px" }} size={20} />
                   My account
                 </Nav.Link>
+
                 <Nav.Link href="/help">
                   <BsInfoCircle style={{ marginRight: "5px" }} size={20} />
                   Help & contact
                 </Nav.Link>
-                {/* <Nav.Link href="/cart"> */}
+
                 <Link
                   style={{
                     textDecoration: "none",
@@ -100,6 +110,7 @@ export default function NavbarComponent() {
                     Basket
                   </div>
                 </Link>
+
                 {/* </Nav.Link> */}
                 {/* <NavDropdown
                   title="Dropdown"

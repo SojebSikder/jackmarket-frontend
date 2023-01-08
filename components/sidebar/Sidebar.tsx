@@ -1,37 +1,32 @@
+import Link from "next/link";
 import React from "react";
+import { BsHouseDoor } from "react-icons/bs";
 
 export default function Sidebar() {
   return (
     <>
       {/* <!-- Sidebar --> */}
       <div
-        className="offcanvas offcanvas-start bg-dark text-white sidebar-nav"
+        className="offcanvas bg-light sidebar-nav"
         tabIndex={-1}
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-body p-0">
-          <nav className="navbar-dark">
+          <nav className="navbar-light">
             <ul className="navbar-nav">
               <li>
-                <div className="text-secondary small fw-bold text-uppercase px-3">
-                  Dashboard
-                </div>
-              </li>
-              <li>
-                <a href="#" className="nav-link px-3 active">
+                <Link href="/" className="nav-link px-3 active">
                   <span className="me-2">
-                    <i className="bi bi-speedometer2"></i>
+                    <BsHouseDoor size={20} />
                   </span>
-                  <span>Dashboard</span>
-                </a>
+                  <span>Home</span>
+                </Link>
               </li>
-              <li className="my-4">
-                <hr />
-              </li>
+
               <li>
                 <div className="text-secondary small fw-bold text-uppercase px-3">
-                  Example
+                  Categories
                 </div>
               </li>
 
