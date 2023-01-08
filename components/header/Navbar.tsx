@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import {
   Button,
@@ -80,10 +81,26 @@ export default function NavbarComponent() {
                   <BsInfoCircle style={{ marginRight: "5px" }} size={20} />
                   Help & contact
                 </Nav.Link>
-                <Nav.Link href="/cart">
-                  <BsCart4 style={{ marginRight: "5px" }} size={20} />
-                  Basket
-                </Nav.Link>
+                {/* <Nav.Link href="/cart"> */}
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--bs-nav-link-color)",
+                  }}
+                  href={"/cart"}
+                >
+                  <div
+                    style={{
+                      border: "1px solid #121212",
+                      borderRadius: "24px",
+                      padding: ".5rem",
+                    }}
+                  >
+                    <BsCart4 style={{ marginRight: "5px" }} size={20} />
+                    Basket
+                  </div>
+                </Link>
+                {/* </Nav.Link> */}
                 {/* <NavDropdown
                   title="Dropdown"
                   id={`offcanvasNavbarDropdown-expand-${expand}`}
