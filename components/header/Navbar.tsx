@@ -1,99 +1,107 @@
+import Image from "next/image";
 import React from "react";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Offcanvas,
+} from "react-bootstrap";
+import { BsInfoCircle, BsPerson, BsCart4 } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
+import { AppConfig } from "../../config/app.config";
 
-export default function Navbar() {
+const expand = "md";
+export default function NavbarComponent() {
   return (
     <>
-      {/* <!-- Navbar --> */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div className="container-fluid">
-          {/* <!-- Siderbar button --> */}
-          <button
-            className="navbar-toggler me-2"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample"
+      <Navbar bg="light" expand={expand} className="mb-3">
+        <Container fluid>
+          <Navbar.Brand href="#">{AppConfig().app.name}</Navbar.Brand>
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand-${expand}`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+            placement="end"
           >
-            <span
-              className="navbar-toggler-icon"
-              data-bs-target="#offcanvasExample"
-            ></span>
-          </button>
-          {/* <!-- End Sidebar button --> */}
-          <a className="navbar-brand fw-bold text-uppercase me-auto" href="#">
-            Navbar
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <form className="d-flex ms-auto" role="search">
-              <div className="input-group my-3 my-lg-0">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Recipient's username"
-                  aria-label="Recipient's username"
-                  aria-describedby="button-addon2"
-                />
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  id="button-addon2"
-                >
-                  <i className="bi bi-search"></i>
-                </button>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                {AppConfig().app.name}
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div className="d-flex justify-content-end flex-grow-1 pe-3">
+                <Form style={{ width: "400px" }} className="d-flex">
+                  <input
+                    type="text"
+                    style={{
+                      width: "100%",
+                      paddingLeft: "10px",
+                      borderWidth: "0.5px",
+                      borderTopLeftRadius: "0.5rem",
+                      borderBottomLeftRadius: "0.5rem",
+                    }}
+                    placeholder="Bread, milk, eggs..."
+                  />
+
+                  <button
+                    style={{
+                      width: "50px",
+                      borderWidth: "0px",
+                      borderTopRightRadius: "0.5rem",
+                      borderBottomRightRadius: "0.5rem",
+                      backgroundColor: "var(--primary-color)",
+                      color: "white",
+                    }}
+                  >
+                    <FaSearch />
+                  </button>
+                </Form>
               </div>
-            </form>
-            <ul className="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link href="/my-products">
+                  <Image
+                    src="/assets/icon/wishlist.png"
+                    style={{ marginRight: "5px" }}
+                    height={20}
+                    width={20}
+                    alt="my products"
+                  />
+                  My products
+                </Nav.Link>
+                <Nav.Link href="/profile">
+                  <BsPerson style={{ marginRight: "5px" }} size={20} />
+                  My account
+                </Nav.Link>
+                <Nav.Link href="/help">
+                  <BsInfoCircle style={{ marginRight: "5px" }} size={20} />
+                  Help & contact
+                </Nav.Link>
+                <Nav.Link href="/cart">
+                  <BsCart4 style={{ marginRight: "5px" }} size={20} />
+                  Basket
+                </Nav.Link>
+                {/* <NavDropdown
+                  title="Dropdown"
+                  id={`offcanvasNavbarDropdown-expand-${expand}`}
                 >
-                  <i className="bi bi-people-fill"></i>
-                </a>
-                <ul
-                  className="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      {/* <!-- End Navbar --> */}
+                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action5">
+                    Something else here
+                  </NavDropdown.Item>
+                </NavDropdown> */}
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
     </>
   );
 }
