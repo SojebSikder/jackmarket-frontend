@@ -20,12 +20,29 @@ export default function NavbarComponent() {
   return (
     <>
       <Navbar
-        bg="light"
+        // bg="light"
         expand={expand}
         className="mb-3 sticky-top"
-        style={{ boxShadow: "rgb(118 118 118) -1px -2px 7px 2px" }}
+        style={{
+          boxShadow: "rgb(118 118 118) -1px -2px 7px 2px",
+          background: "white",
+        }}
       >
         <Container fluid>
+          {/* <!-- Siderbar button --> */}
+          <button
+            className="navbar-toggler me-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+          >
+            <span
+              className="navbar-toggler-icon"
+              data-bs-target="#offcanvasExample"
+            ></span>
+          </button>
+          {/* <!-- End Sidebar button --> */}
           <Navbar.Brand className="navbar-brand" href="/">
             {AppConfig().app.name}
           </Navbar.Brand>

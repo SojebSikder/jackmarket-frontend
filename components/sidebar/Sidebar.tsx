@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { Button, Offcanvas } from "react-bootstrap";
 import { BsHouseDoor } from "react-icons/bs";
 
 export default function Sidebar() {
@@ -7,10 +8,11 @@ export default function Sidebar() {
     <>
       {/* <!-- Sidebar --> */}
       <div
-        className="offcanvas bg-light sidebar-nav"
+        className="offcanvas sidebar-nav mt-2"
         tabIndex={-1}
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
+        style={{ background: "white" }}
       >
         <div className="offcanvas-body p-0">
           <nav className="navbar-light">
