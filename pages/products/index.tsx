@@ -1,9 +1,9 @@
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Alert, Button, Container } from "react-bootstrap";
 import Navbar from "../../components/header/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import ProductCard from "../../components/resuable/product/ProductCard";
+
 
 export default function Home() {
   return (
@@ -12,6 +12,7 @@ export default function Home() {
       <Sidebar />
       <main>
         <Container>
+          <ProductCard />
           <Button variant="primary">Primary</Button>
           {[
             "primary",
