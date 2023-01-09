@@ -4,7 +4,6 @@ import Navbar from "../../components/header/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
 
-
 export default function Home() {
   return (
     <>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import CustomImage from "../CustomImage";
 
@@ -85,6 +86,28 @@ export default function ProductCard() {
             >
               0.72€
             </span>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              marginLeft: "80px",
+              marginTop: "70px",
+              background: "var(--primary-color)",
+              height: "26px",
+              width: "26px",
+              borderRadius: "4px",
+            }}
+          >
+            <Image
+              src="/assets/icon/add-to-cart.png"
+              style={{
+                marginLeft: "4px",
+
+              }}
+              height={18}
+              width={18}
+              alt="cart"
+            />
           </div>
 
           <CustomImage
