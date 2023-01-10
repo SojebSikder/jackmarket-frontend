@@ -2,10 +2,16 @@ import Image from "next/image";
 import React from "react";
 import CustomImage from "../CustomImage";
 
-export default function ProductCard() {
+export default function ProductCard({
+  name,
+  image,
+}: {
+  name: string;
+  image: string;
+}) {
   return (
     <>
-      <div style={{ width: "115px", height: "183px" }}>
+      <div style={{ width: "115px", height: "183px", margin: "7px" }}>
         <div>
           <div
             style={{
@@ -90,7 +96,7 @@ export default function ProductCard() {
           <div
             style={{
               position: "absolute",
-              marginLeft: "80px",
+              marginLeft: "72px",
               marginTop: "70px",
               background: "var(--primary-color)",
               height: "26px",
@@ -102,7 +108,6 @@ export default function ProductCard() {
               src="/assets/icon/add-to-cart.png"
               style={{
                 marginLeft: "4px",
-
               }}
               height={18}
               width={18}
@@ -110,12 +115,7 @@ export default function ProductCard() {
             />
           </div>
 
-          <CustomImage
-            src={
-              "https://res.cloudinary.com/goflink/image/upload/w_600,h_800/product-images-prod/35e51ed7-fb9a-40e8-865b-9879f24c1d24.png"
-            }
-            alt=""
-          />
+          <CustomImage src={`${image}`} alt="" />
         </div>
         <div>
           <span style={{ fontSize: "12px" }}>€1.32</span>
@@ -130,9 +130,7 @@ export default function ProductCard() {
             €1.89
           </span>
         </div>
-        <div style={{ fontSize: "12px", fontWeight: "bold" }}>
-          3Bears Pocket Porridge Mohnig...
-        </div>
+        <div style={{ fontSize: "12px", fontWeight: "bold" }}>{name}</div>
         <div style={{ fontSize: "10.4px" }}>€24.00 / 1kg</div>
       </div>
     </>

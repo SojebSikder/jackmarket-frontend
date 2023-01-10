@@ -3,30 +3,113 @@ import { Alert, Button, Container } from "react-bootstrap";
 import Navbar from "../../components/header/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
+import { getSetting } from "../../utils/Setting";
+import { ProductService } from "../../service/product/product.service";
 
-export default function Home() {
+export const getServerSideProps = async (context: any) => {
+  const { req, query, res, asPath, pathname } = context;
+
+  const page = query.page;
+  const settings = await getSetting();
+
+  console.log(query);
+
+  const productService = await ProductService.findAll(page);
+  const productData = productService.data;
+
+  return {
+    props: {
+      productData: productData,
+      settings: settings,
+      host: req.headers.host,
+    },
+  };
+};
+export default function Index({ productData }: { productData: any }) {
+  const handlePaginateLink = (e: any, page: number, prev = false) => {
+    let params = new URLSearchParams(window.location.search);
+
+    if (prev == null && page == 1) {
+      page = 2;
+    }
+
+    params.set("page", page.toString());
+
+    if (prev) {
+      if (page == -1) {
+        page = 0;
+        params.delete("page");
+      }
+      if (page == 1) {
+        page = 0;
+        params.delete("page");
+      }
+    }
+
+    const new_url = `/products?${params.toString()}`;
+    document.location.href = new_url;
+  };
+
   return (
     <>
       <Navbar />
       <Sidebar />
       <main>
         <Container>
-          <ProductCard />
-          <Button variant="primary">Primary</Button>
-          {[
-            "primary",
-            "secondary",
-            "success",
-            "danger",
-            "warning",
-            "info",
-            "light",
-            "dark",
-          ].map((variant) => (
-            <Alert key={variant} variant={variant}>
-              This is a {variant} alert—check it out!
-            </Alert>
-          ))}
+          <div className="row justify-content-md-start">
+            {productData.current_page == 1 ? (
+              <></>
+            ) : (
+              <div
+                style={{
+                  marginBottom: "40px",
+                }}
+              >
+                <div className="d-flex justify-content-center">
+                  <button
+                    onClick={(e) =>
+                      handlePaginateLink(e, productData.current_page - 1, true)
+                    }
+                    className="btn btn-danger"
+                  >
+                    Load Previous
+                  </button>
+                </div>
+              </div>
+            )}
+            {productData.data.map((product: any) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  name={`${product.name}`}
+                  image={`${
+                    product.images.length > 0 ?? product.images[0].image_url
+                  }`}
+                />
+              );
+            })}
+            <div
+              style={{
+                marginBottom: "40px",
+              }}
+            >
+              <div className="d-flex justify-content-center">
+                Showing {productData.data.length} of {productData.total}
+              </div>
+              {productData.data.length > 0 && (
+                <div className="d-flex justify-content-center">
+                  <button
+                    onClick={(e) =>
+                      handlePaginateLink(e, productData.current_page + 1)
+                    }
+                    className="btn btn-danger"
+                  >
+                    Load More
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </Container>
       </main>
     </>
