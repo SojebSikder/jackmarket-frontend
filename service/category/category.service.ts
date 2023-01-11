@@ -7,7 +7,7 @@ const config = {
 };
 
 export class CategoryService {
-  static async findAll(page?: number) {
+  static async findAll() {
     const data = await Fetch.get(`/category`, config);
     return data.data;
   }

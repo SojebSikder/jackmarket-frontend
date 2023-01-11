@@ -6,6 +6,8 @@ import ProductCard from "../../components/resuable/product/ProductCard";
 import { getSetting } from "../../utils/Setting";
 import { ProductService } from "../../service/product/product.service";
 import { CategoryService } from "../../service/category/category.service";
+import Footer from "../../components/footer/Footer";
+import { FooterService } from "../../service/page/footer.service";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -14,14 +16,18 @@ export const getServerSideProps = async (context: any) => {
 
   const settings = await getSetting();
 
-  const categoryService = await CategoryService.findAll(page);
+  const categoryService = await CategoryService.findAll();
   const categoryData = categoryService.data;
+
+  const footerService = await FooterService.findAll();
+  const footerData = footerService.data;
 
   const productService = await ProductService.findAll(page);
   const productData = productService.data;
 
   return {
     props: {
+      footerData: footerData,
       productData: productData,
       categoryData: categoryData,
       settings: settings,
@@ -30,9 +36,11 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 export default function Index({
+  footerData,
   productData,
   categoryData,
 }: {
+  footerData: any;
   productData: any;
   categoryData: any;
 }) {
@@ -126,6 +134,7 @@ export default function Index({
             </div>
           </div>
         </Container>
+        <Footer footerData={footerData} />
       </main>
     </>
   );
