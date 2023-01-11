@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
-import { BsHouseDoor } from "react-icons/bs";
+import { BsHouseDoor, BsLayoutSplit, BsChevronDown } from "react-icons/bs";
 
-export default function Sidebar() {
+export default function Sidebar({ categoryData }: { categoryData: any }) {
   return (
     <>
       {/* <!-- Sidebar --> */}
@@ -32,38 +32,53 @@ export default function Sidebar() {
                 </div>
               </li>
 
-              <li>
-                <a
-                  className="nav-link px-3 sidebar-link"
-                  data-bs-toggle="collapse"
-                  href="#collapseExample"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  <span className="me-2">
-                    <i className="bi bi-layout-split"></i>
-                  </span>
-                  <span>Layouts</span>
-                  <span className="right-icon ms-auto">
-                    <i className="bi bi-chevron-down"></i>
-                  </span>
-                </a>
-                <div className="collapse" id="collapseExample">
-                  <div>
-                    <ul className="navbar-nav ps-3">
-                      <li>
-                        <a href="#" className="nav-link px-3">
-                          <span className="me-2">
-                            <i className="bi bi-layout-split"></i>
-                          </span>
-                          <span>Nested Link</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
+              {categoryData.map((category: any) => {
+                return (
+                  <li key={category.id}>
+                    <a
+                      className="nav-link px-3 sidebar-link"
+                      data-bs-toggle="collapse"
+                      href={`#collapseExample${category.id}`}
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls={`collapseExample${category.id}`}
+                    >
+                      <span className="me-2">
+                        <BsLayoutSplit />
+                      </span>
+                      <span>{category.name}</span>
+                      {category.sub_categories.length > 0 && (
+                        <span className="right-icon ms-auto">
+                          <BsChevronDown />
+                        </span>
+                      )}
+                    </a>
+                    {category.sub_categories.length > 0 &&
+                      category.sub_categories.map((child_category: any) => {
+                        return (
+                          <div
+                            key={child_category.id}
+                            className="collapse"
+                            id={`collapseExample${category.id}`}
+                          >
+                            <div>
+                              <ul className="navbar-nav ps-3">
+                                <li>
+                                  <a href="#" className="nav-link px-3">
+                                    <span className="me-2">
+                                      <BsLayoutSplit />
+                                    </span>
+                                    <span>{child_category.name}</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>

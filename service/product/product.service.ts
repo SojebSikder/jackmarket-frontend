@@ -6,9 +6,6 @@ const config = {
   },
 };
 
-/**
- * Product service
- */
 export class ProductService {
   static async findAll(page?: number) {
     const data = await Fetch.get(`/product?page=${page}`, config);

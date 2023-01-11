@@ -96,17 +96,17 @@ export default function NavbarComponent() {
                     width={20}
                     alt="my products"
                   />
-                  My products
+                  <span className="d-md-none d-lg-inline">My products</span>
                 </Nav.Link>
 
                 <Nav.Link>
                   <BsPerson style={{ marginRight: "5px" }} size={20} />
-                  My account
+                  <span className="d-md-none d-lg-inline">My account</span>
                 </Nav.Link>
 
                 <Nav.Link href="/help">
                   <BsInfoCircle style={{ marginRight: "5px" }} size={20} />
-                  Help & contact
+                  <span className="d-md-none d-lg-inline">Help & contact</span>
                 </Nav.Link>
 
                 <Link
@@ -124,7 +124,7 @@ export default function NavbarComponent() {
                     }}
                   >
                     <BsCart4 style={{ marginRight: "5px" }} size={20} />
-                    Basket
+                    <span className="d-md-none d-lg-inline">Basket</span>
                   </div>
                 </Link>
 

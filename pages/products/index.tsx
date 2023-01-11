@@ -5,14 +5,17 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
 import { getSetting } from "../../utils/Setting";
 import { ProductService } from "../../service/product/product.service";
+import { CategoryService } from "../../service/category/category.service";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
 
   const page = query.page;
+
   const settings = await getSetting();
 
-  console.log(query);
+  const categoryService = await CategoryService.findAll(page);
+  const categoryData = categoryService.data;
 
   const productService = await ProductService.findAll(page);
   const productData = productService.data;
@@ -20,12 +23,20 @@ export const getServerSideProps = async (context: any) => {
   return {
     props: {
       productData: productData,
+      categoryData: categoryData,
       settings: settings,
       host: req.headers.host,
     },
   };
 };
-export default function Index({ productData }: { productData: any }) {
+export default function Index({
+  productData,
+  categoryData,
+}: {
+  productData: any;
+  categoryData: any;
+}) {
+  // handle pagination button
   const handlePaginateLink = (e: any, page: number, prev = false) => {
     let params = new URLSearchParams(window.location.search);
 
@@ -53,7 +64,7 @@ export default function Index({ productData }: { productData: any }) {
   return (
     <>
       <Navbar />
-      <Sidebar />
+      <Sidebar categoryData={categoryData} />
       <main>
         <Container>
           <div className="row justify-content-md-start">
