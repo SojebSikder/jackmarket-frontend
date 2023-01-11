@@ -93,8 +93,12 @@ export default function Index({
                 <ProductCard
                   key={product.id}
                   name={`${product.name}`}
+                  discount={product.discount}
+                  is_sale={product.is_sale}
+                  price={product.price}
+                  currency_sign={product.currency_sign}
                   image={`${
-                    product.images.length > 0 ?? product.images[0].image_url
+                    product.images.length > 0 ? product.images[0].image_url : ""
                   }`}
                 />
               );
