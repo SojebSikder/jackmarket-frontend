@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const sitemapData = await SitemapService.findAll();
-  const sitemap = sitemapData.data;
 
-  res.status(200).send(sitemap);
+  res.status(200).send(sitemapData);
 }
