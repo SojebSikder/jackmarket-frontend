@@ -101,6 +101,8 @@ export default function Index({
               return (
                 <ProductCard
                   key={product.id}
+                  id={product.id}
+                  slug={product.slug}
                   name={`${product.name}`}
                   discount={product.discount}
                   is_sale={product.is_sale}

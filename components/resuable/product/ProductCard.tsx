@@ -1,9 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { StringHelper } from "../../../helper/string.helper";
-import CustomImage from "../CustomImage";
+import CustomImage from "../custom/CustomImage";
 
 export default function ProductCard({
+  id,
+  slug,
   name,
   image,
   is_sale,
@@ -11,6 +14,8 @@ export default function ProductCard({
   price,
   currency_sign,
 }: {
+  id: number;
+  slug: string;
   name: string;
   image: string;
   is_sale: boolean;
@@ -109,8 +114,8 @@ export default function ProductCard({
           ) : (
             <></>
           )}
-
           {/* end discount badge */}
+
           <div
             style={{
               position: "absolute",
@@ -148,7 +153,12 @@ export default function ProductCard({
             {currency_sign}1.89
           </span>
         </div> */}
-        <div style={{ fontSize: "14px", fontWeight: "bold" }}>{name}</div>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          href={`/products/${id}/${slug}`}
+        >
+          <div style={{ fontSize: "14px", fontWeight: "bold" }}>{name}</div>
+        </Link>
         {/* <div style={{ fontSize: "10.4px" }}>{currency_sign}24.00 / 1kg</div> */}
         <div>
           {currency_sign}

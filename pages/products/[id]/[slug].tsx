@@ -9,12 +9,13 @@ import { CategoryService } from "../../../service/category/category.service";
 import Footer from "../../../components/partial/footer/Footer";
 import { FooterService } from "../../../service/page/footer.service";
 import Main from "../../../components/partial/Main";
+import CustomCarousel from "../../../components/resuable/custom/CustomCarousel";
+import CustomButton from "../../../components/resuable/custom/CustomButton";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
 
   const id = query.id;
-  const page = query.page;
 
   const settings = await getSetting();
 
@@ -52,10 +53,44 @@ export default function Index({
       <Sidebar categoryData={categoryData} />
       <Main>
         <Container>
-          <div>{productData.name}</div>
-          <div
-            dangerouslySetInnerHTML={{ __html: productData.description }}
-          ></div>
+          <div className="row">
+            <div className="col">
+              <CustomCarousel images={productData.images} />
+            </div>
+            <div style={{ marginLeft: "20px" }} className="col">
+              <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+                {productData.name}
+              </div>
+              <div className="mt-2">
+                {productData.is_sale ? (
+                  <>
+                    <span style={{ fontSize: "20px" }}>
+                      {productData.currency_sign}
+                      {productData.price}{" "}
+                    </span>
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        color: "#787878",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {productData.currency_sign}
+                      {productData.price}
+                    </span>
+                  </>
+                ) : (
+                  <span>
+                    {productData.currency_sign}
+                    {productData.price}
+                  </span>
+                )}
+              </div>
+              <div className="mt-4">
+                <CustomButton>Add item</CustomButton>
+              </div>
+            </div>
+          </div>
         </Container>
         <Footer footerData={footerData} />
       </Main>
