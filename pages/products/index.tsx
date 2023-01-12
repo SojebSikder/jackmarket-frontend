@@ -1,13 +1,14 @@
 import styles from "../styles/Home.module.css";
 import { Alert, Button, Container } from "react-bootstrap";
-import Navbar from "../../components/header/Navbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/partial/header/Navbar";
+import Sidebar from "../../components/partial/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
 import { getSetting } from "../../utils/Setting";
 import { ProductService } from "../../service/product/product.service";
 import { CategoryService } from "../../service/category/category.service";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/partial/footer/Footer";
 import { FooterService } from "../../service/page/footer.service";
+import Main from "../../components/partial/Main";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -73,7 +74,7 @@ export default function Index({
     <>
       <Navbar />
       <Sidebar categoryData={categoryData} />
-      <main>
+      <Main>
         <Container>
           <div className="row justify-content-md-start">
             {productData.current_page == 1 ? (
@@ -135,7 +136,7 @@ export default function Index({
           </div>
         </Container>
         <Footer footerData={footerData} />
-      </main>
+      </Main>
     </>
   );
 }

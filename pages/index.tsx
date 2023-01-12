@@ -1,12 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container } from "react-bootstrap";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <Container>landing page here</Container>
+      <Container>
+        <Link className="btn btn-primary" href="/products">
+          Products
+        </Link>
+      </Container>
     </>
   );
 }

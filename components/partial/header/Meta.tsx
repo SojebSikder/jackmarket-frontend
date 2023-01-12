@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { AppConfig } from "../../config/app.config";
+import { AppConfig } from "../../../config/app.config";
 
 function Meta({
   title = "",
@@ -30,7 +30,7 @@ function Meta({
       <meta property="og:url" content={`https://${url}`} />
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
-      <meta property="og:site_name" content={AppConfig.appName} />
+      <meta property="og:site_name" content={AppConfig().app.name} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${image}`} />
       {/* commerce */}

@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import { BsInfoCircle, BsPerson, BsCart4 } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
-import { AppConfig } from "../../config/app.config";
+import { AppConfig } from "../../../config/app.config";
 
 const expand = "md";
 export default function NavbarComponent() {
@@ -43,9 +43,10 @@ export default function NavbarComponent() {
             ></span>
           </button>
           {/* <!-- End Sidebar button --> */}
-          <Navbar.Brand className="navbar-brand" href="/">
+          <Link className="navbar-brand" href="/">
             {AppConfig().app.name}
-          </Navbar.Brand>
+          </Link>
+
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-${expand}`}
