@@ -25,7 +25,7 @@ export default function ProductCard({
 }) {
   return (
     <>
-      <div style={{ width: "115px", height: "183px", margin: "7px" }}>
+      <div style={{ width: "130px", height: "183px", margin: "7px" }}>
         <div>
           {/* discount badge */}
           {is_sale ? (
@@ -157,7 +157,9 @@ export default function ProductCard({
           style={{ textDecoration: "none", color: "black" }}
           href={`/products/${id}/${slug}`}
         >
-          <div style={{ fontSize: "14px", fontWeight: "bold" }}>{name}</div>
+          <div style={{ fontSize: "14px", fontWeight: "bold" }}>
+            {StringHelper.textShorten(name, 26)}
+          </div>
         </Link>
         {/* <div style={{ fontSize: "10.4px" }}>{currency_sign}24.00 / 1kg</div> */}
         <div>
