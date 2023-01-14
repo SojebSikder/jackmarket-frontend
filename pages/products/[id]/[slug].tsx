@@ -11,6 +11,7 @@ import { FooterService } from "../../../service/page/footer.service";
 import Main from "../../../components/partial/Main";
 import CustomCarousel from "../../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../../components/resuable/custom/CustomButton";
+import Meta from "../../../components/partial/header/Meta";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -42,13 +43,33 @@ export default function Index({
   footerData,
   productData,
   categoryData,
+  host,
 }: {
   footerData: any;
   productData: any;
   categoryData: any;
+  host: string;
 }) {
   return (
     <>
+      <Meta
+        title={`${
+          productData.meta_title ? productData.meta_title : productData.title
+        }`}
+        description={productData.meta_description}
+        price={productData.price}
+        currency={productData.currency_code}
+        keyword={productData.meta_keyword}
+        image={`${
+          productData.images.length > 0 && productData.images[0].image_url
+        }`}
+        url={`${host}/products/${productData.id}/${productData.slug}`}
+        type={"product"}
+        availability={productData.availability}
+        brand={productData.brand}
+        product_id={productData.id}
+        domain={host}
+      />
       <Navbar />
       <Sidebar categoryData={categoryData} />
       <Main>
