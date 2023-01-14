@@ -93,29 +93,27 @@ export default function Index({
           </div>
           <div className="mt-5">
             <Tabs
-              defaultActiveKey="home"
+              defaultActiveKey={`_productinformation`}
               id="uncontrolled-tab-example"
               className="mb-3"
             >
-              <Tab eventKey="home" title="Home">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit
-                alias, explicabo eum commodi mollitia quas id, maxime error
-                quidem placeat voluptate? Quis dicta voluptatum modi! Nesciunt
-                aperiam tempora nulla adipisci!
-              </Tab>
-              <Tab eventKey="profile" title="Profile">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Mollitia ipsum nemo recusandae ducimus, corrupti consectetur
-                deserunt nostrum totam molestiae vel ut, rerum, maiores unde.
-                Et, officiis libero. Veniam, sapiente? Nemo.
-              </Tab>
-              <Tab eventKey="contact" title="Contact">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Mollitia ipsum nemo recusandae ducimus, corrupti consectetur
-                deserunt nostrum totam molestiae vel ut, rerum, maiores unde.
-                Et, officiis libero. Veniam, sapiente? Nemo.
-              </Tab>
+              <Tab
+                eventKey={`_productinformation`}
+                title={`Description`}
+                dangerouslySetInnerHTML={{ __html: productData.description }}
+              ></Tab>
+              {productData.details.map((detail: any) => {
+                return (
+                  <Tab
+                    key={detail.id}
+                    eventKey={`${detail.name}`}
+                    title={`${detail.name}`}
+                    dangerouslySetInnerHTML={{ __html: detail.body }}
+                  ></Tab>
+                );
+              })}
             </Tabs>
+            <hr className="mt-5" />
           </div>
         </Container>
         <Footer footerData={footerData} />

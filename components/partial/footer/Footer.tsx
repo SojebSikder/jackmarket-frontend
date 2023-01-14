@@ -5,9 +5,10 @@ export default function Footer({ footerData }: { footerData: any }) {
   return (
     <footer
       style={{
-        height: "410px",
+        height: "293px",
+        marginTop: "150px",
       }}
-      className="mt-5 p-4"
+      className="p-4"
     >
       <div className="row justify-content-center">
         {footerData.map((footer: any) => {
