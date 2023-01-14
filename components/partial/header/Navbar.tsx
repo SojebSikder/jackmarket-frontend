@@ -43,7 +43,7 @@ export default function NavbarComponent() {
             ></span>
           </button>
           {/* <!-- End Sidebar button --> */}
-          <Link className="navbar-brand" href="/">
+          <Link className="navbar-brand" href="/products">
             {AppConfig().app.name}
           </Link>
 

@@ -18,7 +18,7 @@ export default function Sidebar({ categoryData }: { categoryData: any }) {
           <nav className="navbar-light">
             <ul className="navbar-nav">
               <li>
-                <Link href="/" className="nav-link px-3 active">
+                <Link href="/products" className="nav-link px-3 active">
                   <span className="me-2">
                     <BsHouseDoor size={20} />
                   </span>
