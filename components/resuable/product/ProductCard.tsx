@@ -85,7 +85,7 @@ export default function ProductCard({
                   top: "14px",
                   fontWeight: "bold",
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   letterSpacing: "0",
                 }}
               >
