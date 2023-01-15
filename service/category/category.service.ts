@@ -11,8 +11,8 @@ export class CategoryService {
     const data = await Fetch.get(`/category`, config);
     return data.data;
   }
-  static async findOne(id: number) {
-    const data = await Fetch.get(`/category/${id}`, config);
+  static async findOne(slug: number) {
+    const data = await Fetch.get(`/category/${slug}`, config);
     return data.data;
   }
 }
