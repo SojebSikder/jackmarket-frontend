@@ -1,7 +1,11 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import React from "react";
 import { BsHouseDoor, BsLayoutSplit, BsChevronDown } from "react-icons/bs";
+import {
+  CollapseComponent,
+  CollapseItem,
+} from "../../resuable/custom/CollapseComponent";
+import CustomImage from "../../resuable/custom/CustomImage";
 
 export default function Sidebar({ categoryData }: { categoryData: any }) {
   return (
@@ -32,27 +36,65 @@ export default function Sidebar({ categoryData }: { categoryData: any }) {
                 </div>
               </li>
 
+              {/* <CollapseComponent
+                title={
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    href={`/category`}
+                  >
+                    hello world
+                  </Link>
+                }
+              >
+                <CollapseItem>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    href={`/category`}
+                  >
+                    hello world
+                  </Link>
+                </CollapseItem>
+              </CollapseComponent> */}
+
               {categoryData.map((category: any) => {
                 return (
                   <li key={category.id}>
-                    <a
-                      className="nav-link px-3 sidebar-link"
-                      data-bs-toggle="collapse"
-                      href={`#collapseExample${category.id}`}
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls={`collapseExample${category.id}`}
-                    >
+                    <div className="nav-link px-3 sidebar-link">
                       <span className="me-2">
-                        <BsLayoutSplit />
+                        {category.image ? (
+                          <CustomImage
+                            height={20}
+                            width={20}
+                            src={`${category.image_url}`}
+                          />
+                        ) : (
+                          <BsLayoutSplit />
+                        )}
                       </span>
-                      <span>{category.name}</span>
+                      <span>
+                        <Link
+                          style={{ textDecoration: "none", color: "black" }}
+                          href={`/category/${category.slug}`}
+                        >
+                          {category.name}
+                        </Link>
+                      </span>
                       {category.sub_categories.length > 0 && (
-                        <span className="right-icon ms-auto">
-                          <BsChevronDown />
-                        </span>
+                        <a
+                          style={{ display: "inline" }}
+                          className="sidebar-link"
+                          data-bs-toggle="collapse"
+                          href={`#collapseExample${category.id}`}
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls={`collapseExample${category.id}`}
+                        >
+                          <span className="right-icon ms-auto">
+                            <BsChevronDown />
+                          </span>
+                        </a>
                       )}
-                    </a>
+                    </div>
                     {category.sub_categories.length > 0 &&
                       category.sub_categories.map((child_category: any) => {
                         return (
@@ -64,12 +106,23 @@ export default function Sidebar({ categoryData }: { categoryData: any }) {
                             <div>
                               <ul className="navbar-nav ps-3">
                                 <li>
-                                  <a href="#" className="nav-link px-3">
+                                  <Link
+                                    href={`/category/${child_category.slug}`}
+                                    className="nav-link px-3"
+                                  >
                                     <span className="me-2">
-                                      <BsLayoutSplit />
+                                      {child_category.image ? (
+                                        <CustomImage
+                                          height={20}
+                                          width={20}
+                                          src={`${child_category.image_url}`}
+                                        />
+                                      ) : (
+                                        <BsLayoutSplit />
+                                      )}
                                     </span>
                                     <span>{child_category.name}</span>
-                                  </a>
+                                  </Link>
                                 </li>
                               </ul>
                             </div>
