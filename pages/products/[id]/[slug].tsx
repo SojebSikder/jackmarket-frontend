@@ -3,7 +3,7 @@ import { Alert, Button, Container, Tab, Tabs } from "react-bootstrap";
 import Navbar from "../../../components/partial/header/Navbar";
 import Sidebar from "../../../components/partial/sidebar/Sidebar";
 import ProductCard from "../../../components/resuable/product/ProductCard";
-import { getSetting } from "../../../utils/Setting";
+import { getSetting, getSettingValue } from "../../../utils/Setting";
 import { ProductService } from "../../../service/product/product.service";
 import { CategoryService } from "../../../service/category/category.service";
 import Footer from "../../../components/partial/footer/Footer";
@@ -43,11 +43,13 @@ export default function Index({
   footerData,
   productData,
   categoryData,
+  settings,
   host,
 }: {
   footerData: any;
   productData: any;
   categoryData: any;
+  settings: any;
   host: string;
 }) {
   return (
@@ -55,7 +57,7 @@ export default function Index({
       <Meta
         title={`${
           productData.meta_title ? productData.meta_title : productData.title
-        }`}
+        } - ${getSettingValue("name", settings)}`}
         description={productData.meta_description}
         price={productData.price}
         currency={productData.currency_code}

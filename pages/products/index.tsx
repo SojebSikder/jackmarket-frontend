@@ -3,12 +3,13 @@ import { Alert, Button, Container } from "react-bootstrap";
 import Navbar from "../../components/partial/header/Navbar";
 import Sidebar from "../../components/partial/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
-import { getSetting } from "../../utils/Setting";
+import { getSetting, getSettingValue } from "../../utils/Setting";
 import { ProductService } from "../../service/product/product.service";
 import { CategoryService } from "../../service/category/category.service";
 import Footer from "../../components/partial/footer/Footer";
 import { FooterService } from "../../service/page/footer.service";
 import Main from "../../components/partial/Main";
+import Meta from "../../components/partial/header/Meta";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -40,10 +41,14 @@ export default function Index({
   footerData,
   productData,
   categoryData,
+  settings,
+  host,
 }: {
   footerData: any;
   productData: any;
   categoryData: any;
+  settings: any;
+  host: string;
 }) {
   // handle pagination button
   const handlePaginateLink = (e: any, page: number, prev = false) => {
@@ -72,6 +77,16 @@ export default function Index({
 
   return (
     <>
+      <Meta
+        title={`${getSettingValue("name", settings)} - ${getSettingValue(
+          "slogan",
+          settings
+        )}`}
+        description={`${getSettingValue("meta_description", settings)}`}
+        keyword={`${getSettingValue("meta_keyword", settings)}`}
+        url={`${host}`}
+        domain={host}
+      />
       <Navbar />
       <Sidebar categoryData={categoryData} />
       <Main>

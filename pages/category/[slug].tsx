@@ -3,7 +3,7 @@ import { Alert, Button, Container } from "react-bootstrap";
 import Navbar from "../../components/partial/header/Navbar";
 import Sidebar from "../../components/partial/sidebar/Sidebar";
 import ProductCard from "../../components/resuable/product/ProductCard";
-import { getSetting } from "../../utils/Setting";
+import { getSetting, getSettingValue } from "../../utils/Setting";
 import { ProductService } from "../../service/product/product.service";
 import { CategoryService } from "../../service/category/category.service";
 import Footer from "../../components/partial/footer/Footer";
@@ -42,11 +42,13 @@ export default function Index({
   footerData,
   categoryData,
   singleCategoryData,
+  settings,
   host,
 }: {
   footerData: any;
   categoryData: any;
   singleCategoryData: any;
+  settings: any;
   host: string;
 }) {
   // handle pagination button
@@ -81,7 +83,7 @@ export default function Index({
           singleCategoryData.meta_title
             ? singleCategoryData.meta_title
             : singleCategoryData.name
-        }`}
+        } - ${getSettingValue("name", settings)}`}
         description={singleCategoryData.meta_description}
         keyword={singleCategoryData.meta_keyword}
         image={`${singleCategoryData.image_url}`}
