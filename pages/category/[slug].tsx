@@ -122,23 +122,30 @@ export default function Index({
               </div>
               <hr style={{ marginTop: "10px" }} />
             </div>
-            {singleCategoryData.products.map((product: any) => {
-              return (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  slug={product.slug}
-                  name={`${product.name}`}
-                  discount={product.discount}
-                  is_sale={product.is_sale}
-                  price={product.price}
-                  currency_sign={product.currency_sign}
-                  image={`${
-                    product.images.length > 0 ? product.images[0].image_url : ""
-                  }`}
-                />
-              );
-            })}
+            {singleCategoryData.products.length > 0 ? (
+              singleCategoryData.products.map((product: any) => {
+                return (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    slug={product.slug}
+                    name={`${product.name}`}
+                    discount={product.discount}
+                    is_sale={product.is_sale}
+                    price={product.price}
+                    currency_sign={product.currency_sign}
+                    image={`${
+                      product.images.length > 0
+                        ? product.images[0].image_url
+                        : ""
+                    }`}
+                  />
+                );
+              })
+            ) : (
+              <div>No products</div>
+            )}
+
             {/* <div
               style={{
                 marginBottom: "40px",
