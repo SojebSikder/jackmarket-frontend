@@ -14,6 +14,8 @@ import CustomButton from "../../components/resuable/custom/CustomButton";
 import Meta from "../../components/partial/header/Meta";
 import { CartHelper } from "../../helper/cart.helper";
 import { BiMinus, BiPlus } from "react-icons/bi";
+import QuantityButton from "../../components/resuable/product/QuantityButton";
+import { useReducer } from "react";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -34,6 +36,42 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 };
+
+// An enum with all the types of actions to use in our reducer
+enum CountActionKind {
+  INCREASE = "INCREASE",
+  DECREASE = "DECREASE",
+}
+
+// An interface for our actions
+interface CountAction {
+  type: CountActionKind;
+  payload?: number;
+}
+
+// An interface for our state
+interface CountState {
+  count: number;
+}
+// Our reducer function that uses a switch statement to handle our actions
+function counterReducer(state: CountState, action: CountAction) {
+  const { type, payload } = action;
+  switch (type) {
+    case CountActionKind.INCREASE:
+      return {
+        ...state,
+        count: state.count + 1,
+      };
+    case CountActionKind.DECREASE:
+      return {
+        ...state,
+        count: state.count - 1,
+      };
+    default:
+      return state;
+  }
+}
+
 export default function Index({
   footerData,
   settings,
@@ -45,6 +83,8 @@ export default function Index({
   host: string;
   carts: any[];
 }) {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
   return (
     <>
       <Meta
@@ -81,14 +121,22 @@ export default function Index({
                         <tr key={cart.id}>
                           <td>{cart.product.name}</td>
                           <td>
-                            {cart.quantity}
-                            <button>
-                              <BiMinus />
-                            </button>
-                            <span>2</span>
-                            <button>
-                              <BiPlus />
-                            </button>
+                            <QuantityButton
+                              onDecrease={() =>
+                                dispatch({
+                                  type: CountActionKind.DECREASE,
+                                  payload: 5,
+                                })
+                              }
+                              onIncrease={() =>
+                                dispatch({
+                                  type: CountActionKind.INCREASE,
+                                  payload: 5,
+                                })
+                              }
+                              // value={cart.quantity}
+                              value={state.count}
+                            />
                           </td>
                           <td>{cart.product.price}</td>
                           <td>{cart.subtotal}</td>
