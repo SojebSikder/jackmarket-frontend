@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "../styles/Home.module.css";
 import { Alert, Button, Container, Tab, Tabs } from "react-bootstrap";
 import Navbar from "../../../components/partial/header/Navbar";
@@ -12,8 +13,8 @@ import Main from "../../../components/partial/Main";
 import CustomCarousel from "../../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../../components/resuable/custom/CustomButton";
 import Meta from "../../../components/partial/header/Meta";
-import React from "react";
 import { CartHelper } from "../../../helper/cart.helper";
+import { BiPlus, BiMinus } from "react-icons/bi";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -125,6 +126,13 @@ export default function Index({
               </div>
               <div className="mt-4">
                 <CustomButton onClick={addToCart}>Add item</CustomButton>
+                {/* <button>
+                  <BiMinus />
+                </button>
+                <span>2</span>
+                <button>
+                  <BiPlus />
+                </button> */}
               </div>
             </div>
           </div>

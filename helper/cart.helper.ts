@@ -7,7 +7,7 @@ type CartOption = {
   id?: string; // for internal use
   product_id: number;
   quantity: number;
-  attribute?: any[];
+  attribute?: any;
 };
 /**
  * CartHelper - Session based cart
@@ -76,7 +76,7 @@ export class CartHelper {
    */
   static async findAll(context = null) {
     try {
-      let data = [];
+      let data: CartOption[] = [];
       data =
         CookieHelper.get({ key: "carts", context: context }) == null
           ? []
@@ -84,66 +84,70 @@ export class CartHelper {
 
       if (data) {
         data = await Promise.all(
-          data.map(async (item: any) => {
+          data.map(async (item) => {
             try {
               const settings = await getSetting();
               const productService = await ProductService.findOne(
                 item.product_id
               );
-              const productData = await productService.data;
-              const product = productData.data;
+              const product = productService.data;
 
-              item.subtotal = product.price;
-              item.currency = getSettingValue("currency_sign", settings);
-              item.attribute = JSON.parse(item.attribute);
-              item.product = product;
-
+              Object.assign(item, { subtotal: product.price });
+              Object.assign(item, {
+                currency: getSettingValue("currency_sign", settings),
+              });
+              // Object.assign(item, {
+              //   attribute: JSON.parse(item.attribute),
+              // });
+              Object.assign(item, {
+                product: product,
+              });
               let total = 0.0;
-              if (item.attribute.length > 0) {
-                if (item.variant.product.option_set) {
-                  // if option set available
-                  const attributeData = item.attribute;
-                  const elementData = item.variant.product.option_set.elements;
+              // if (item.attribute.length > 0) {
+              //   if (item.variant.product.option_set) {
+              //     // if option set available
+              //     const attributeData = item.attribute;
+              //     const elementData = item.variant.product.option_set.elements;
 
-                  const totalMap = attributeData.map((attribute: any) => {
-                    const optionSetPrice = elementData.map((element: any) => {
-                      if (element.type == "select") {
-                        const elementPrice = element.option_value.map(
-                          (optionValue: any) => {
-                            if (optionValue.value == attribute.value) {
-                              return Number(optionValue.price) ?? 0.0;
-                            } else {
-                              return 0.0;
-                            }
-                          }
-                        );
-                        const elementPriceReduce = elementPrice.reduce(
-                          (curr: number, prev: number) => {
-                            return Number(curr) + Number(prev);
-                          }
-                        );
-                        return elementPriceReduce;
-                      } else {
-                        return 0.0;
-                      }
-                    });
-                    const optionSetPriceReduce = optionSetPrice.reduce(
-                      (curr: number, prev: number) => {
-                        return Number(curr) + Number(prev);
-                      }
-                    );
-                    return optionSetPriceReduce;
-                  });
+              //     const totalMap = attributeData.map((attribute: any) => {
+              //       const optionSetPrice = elementData.map((element: any) => {
+              //         if (element.type == "select") {
+              //           const elementPrice = element.option_value.map(
+              //             (optionValue: any) => {
+              //               if (optionValue.value == attribute.value) {
+              //                 return Number(optionValue.price) ?? 0.0;
+              //               } else {
+              //                 return 0.0;
+              //               }
+              //             }
+              //           );
+              //           const elementPriceReduce = elementPrice.reduce(
+              //             (curr: number, prev: number) => {
+              //               return Number(curr) + Number(prev);
+              //             }
+              //           );
+              //           return elementPriceReduce;
+              //         } else {
+              //           return 0.0;
+              //         }
+              //       });
+              //       const optionSetPriceReduce = optionSetPrice.reduce(
+              //         (curr: number, prev: number) => {
+              //           return Number(curr) + Number(prev);
+              //         }
+              //       );
+              //       return optionSetPriceReduce;
+              //     });
 
-                  const totalOptionSetPrice = totalMap.reduce(
-                    (curr: number, prev: number) => {
-                      return Number(curr) + Number(prev);
-                    },
-                    0.0
-                  );
-                  total += totalOptionSetPrice;
-                }
-              }
+              //     const totalOptionSetPrice = totalMap.reduce(
+              //       (curr: number, prev: number) => {
+              //         return Number(curr) + Number(prev);
+              //       },
+              //       0.0
+              //     );
+              //     total += totalOptionSetPrice;
+              //   }
+              // }
               // Discount
               if (product.is_sale) {
                 total += StringHelper.discount(product.price, product.discount);
@@ -151,17 +155,19 @@ export class CartHelper {
                 total += Number(product.price);
               }
 
-              item.subtotal = total;
-
+              Object.assign(item, {
+                subtotal: total,
+              });
               return item;
             } catch (error) {
               throw error;
             }
           })
         );
+        if (data) {
+          return data;
+        }
       }
-
-      return data;
     } catch (error) {
       console.log(CartHelper.removeAll());
       return [];

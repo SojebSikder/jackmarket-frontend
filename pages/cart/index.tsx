@@ -12,6 +12,7 @@ import Main from "../../components/partial/Main";
 import CustomCarousel from "../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../components/resuable/custom/CustomButton";
 import Meta from "../../components/partial/header/Meta";
+import { CartHelper } from "../../helper/cart.helper";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -21,11 +22,14 @@ export const getServerSideProps = async (context: any) => {
   const footerService = await FooterService.findAll();
   const footerData = footerService.data;
 
+  const cartData = await CartHelper.findAll(context);
+
   return {
     props: {
       footerData: footerData,
       settings: settings,
       host: req.headers.host,
+      carts: cartData,
     },
   };
 };
@@ -33,10 +37,12 @@ export default function Index({
   footerData,
   settings,
   host,
+  carts,
 }: {
   footerData: any;
   settings: any;
   host: string;
+  carts: any[];
 }) {
   return (
     <>
@@ -62,31 +68,23 @@ export default function Index({
                 <table className="table">
                   <thead className="table-light">
                     <tr>
-                      <th>Your items (8)</th>
+                      <th>Your items ({carts.length})</th>
                       <th>Quantity</th>
                       <th>Item price</th>
                       <th>Items total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>vegetables</td>
-                      <td>10</td>
-                      <td>$6</td>
-                      <td>$13.78</td>
-                    </tr>
-                    <tr>
-                      <td>vegetables</td>
-                      <td>10</td>
-                      <td>$6</td>
-                      <td>$13.78</td>
-                    </tr>
-                    <tr>
-                      <td>vegetables</td>
-                      <td>10</td>
-                      <td>$6</td>
-                      <td>$13.78</td>
-                    </tr>
+                    {carts.map((cart) => {
+                      return (
+                        <tr key={cart.id}>
+                          <td>{cart.product.name}</td>
+                          <td>{cart.quantity}</td>
+                          <td>{cart.product.price}</td>
+                          <td>{cart.subtotal}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
