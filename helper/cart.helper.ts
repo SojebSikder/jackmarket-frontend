@@ -3,6 +3,12 @@ import { getSetting, getSettingValue } from "../utils/Setting";
 import { CookieHelper } from "./cookie.helper";
 import { StringHelper } from "./string.helper";
 
+type CartOption = {
+  id?: string; // for internal use
+  product_id: number;
+  quantity: number;
+  attribute?: any[];
+};
 /**
  * CartHelper - Session based cart
  */
@@ -11,21 +17,37 @@ export class CartHelper {
    * Store product items to session cart
    * @param {*} items
    */
-  static store(items: any, callback?: Function) {
-    // [{id, product_id, quantity, attribute}]
-    const cartData = {
+  static store(items: CartOption, callback?: Function) {
+    const cartData: CartOption = {
       id: generateCode(16),
       product_id: items.product_id,
       quantity: items.quantity,
       attribute: items.attribute,
     };
-    let data = [];
+
+    let data: CartOption[] = [];
 
     data =
       CookieHelper.get({ key: "carts" }) == null
         ? []
         : JSON.parse(CookieHelper.get({ key: "carts" }));
-    data.push(cartData);
+
+    // check if duplicate product exist
+    const existingProduct = data.find(
+      (dt) => dt.product_id == cartData.product_id
+    );
+
+    if (existingProduct) {
+      // update quantity if exists
+      data = data.map((dt) => {
+        if (existingProduct.product_id == dt.product_id) {
+          dt.quantity++;
+        }
+        return { ...dt };
+      });
+    } else {
+      data.push(cartData);
+    }
 
     CookieHelper.set({ key: "carts", value: JSON.stringify(data) });
     if (callback) {

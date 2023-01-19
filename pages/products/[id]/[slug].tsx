@@ -12,6 +12,8 @@ import Main from "../../../components/partial/Main";
 import CustomCarousel from "../../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../../components/resuable/custom/CustomButton";
 import Meta from "../../../components/partial/header/Meta";
+import React from "react";
+import { CartHelper } from "../../../helper/cart.helper";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -52,6 +54,18 @@ export default function Index({
   settings: any;
   host: string;
 }) {
+  const addToCart = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    const data = {
+      product_id: productData.id,
+      quantity: 1,
+    };
+
+    // session based cart
+    CartHelper.store(data);
+  };
+
   return (
     <>
       <Meta
@@ -110,7 +124,7 @@ export default function Index({
                 )}
               </div>
               <div className="mt-4">
-                <CustomButton>Add item</CustomButton>
+                <CustomButton onClick={addToCart}>Add item</CustomButton>
               </div>
             </div>
           </div>

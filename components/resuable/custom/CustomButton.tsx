@@ -1,11 +1,8 @@
 import React from "react";
 
-export default function CustomButton({
-  children,
-  ...props
-}: {
-  children?: any;
-}) {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+const CustomButton: React.FC<ButtonProps> = ({ children, ...props }) => {
   return (
     <button
       style={{
@@ -19,4 +16,6 @@ export default function CustomButton({
       {children}
     </button>
   );
-}
+};
+
+export default CustomButton;
