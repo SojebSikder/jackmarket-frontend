@@ -13,6 +13,7 @@ import CustomCarousel from "../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../components/resuable/custom/CustomButton";
 import Meta from "../../components/partial/header/Meta";
 import { CartHelper } from "../../helper/cart.helper";
+import { BiMinus, BiPlus } from "react-icons/bi";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -79,7 +80,16 @@ export default function Index({
                       return (
                         <tr key={cart.id}>
                           <td>{cart.product.name}</td>
-                          <td>{cart.quantity}</td>
+                          <td>
+                            {cart.quantity}
+                            <button>
+                              <BiMinus />
+                            </button>
+                            <span>2</span>
+                            <button>
+                              <BiPlus />
+                            </button>
+                          </td>
                           <td>{cart.product.price}</td>
                           <td>{cart.subtotal}</td>
                         </tr>
