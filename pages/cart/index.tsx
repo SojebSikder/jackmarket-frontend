@@ -16,6 +16,8 @@ import { CartHelper } from "../../helper/cart.helper";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import QuantityButton from "../../components/resuable/product/QuantityButton";
 import { useEffect, useReducer, useState } from "react";
+import CustomToast from "../../components/resuable/custom/CustomToast";
+import { AppConfig } from "../../config/app.config";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -50,6 +52,14 @@ export default function Index({
 }) {
   const [carts, setCarts] = useState(cartsData);
   const [isUpdateQuantity, setIsUpdateQuantity] = useState(0);
+  const [showToast, setShowToast] = useState(false);
+  
+  const handleShowToast = () => {
+    setShowToast(true);
+  };
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
 
   const _cartUpdateState = (product_id: number) => {
     setIsUpdateQuantity(product_id);
@@ -85,14 +95,15 @@ export default function Index({
   };
 
   const updateCart = async (id: number, quantity: number) => {
-    // hide the save button
     CartHelper.update(id, quantity);
+    // hide the save button
     _cartUpdateState(0);
 
     const updatedCart = await CartHelper.findAll();
 
     if (updatedCart) {
       setCarts(updatedCart);
+      handleShowToast();
     }
   };
 
@@ -108,6 +119,9 @@ export default function Index({
       <Navbar />
       <Main>
         <Container>
+          <CustomToast show={showToast} onClose={handleCloseToast}>
+            Cart updated successfully
+          </CustomToast>
           <div className="row">
             <div className="col">
               <div style={{ fontSize: "32px", fontWeight: "bold" }}>

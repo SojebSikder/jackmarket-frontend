@@ -84,13 +84,22 @@ export class CartHelper {
     const existingProduct = data.find((dt) => dt.id == id);
 
     if (existingProduct) {
-      // update quantity if exists
-      data = data.map((dt) => {
-        if (existingProduct.id == dt.id) {
-          dt.quantity = quantity;
-        }
-        return { ...dt };
-      });
+      if (quantity <= 0) {
+        data = data.reduce(function (prev, current) {
+          if (current.id != id) {
+            prev.push(current);
+          }
+          return prev;
+        }, []);
+      } else {
+        // update quantity if exists
+        data = data.map((dt) => {
+          if (existingProduct.id == dt.id) {
+            dt.quantity = quantity;
+          }
+          return { ...dt };
+        });
+      }
 
       CookieHelper.set({ key: "carts", value: JSON.stringify(data) });
       if (callback) {
