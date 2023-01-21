@@ -3,7 +3,7 @@ import { getSetting, getSettingValue } from "../utils/Setting";
 import { CookieHelper } from "./cookie.helper";
 import { StringHelper } from "./string.helper";
 
-type CartOption = {
+export type CartOption = {
   id?: string; // for internal use
   product_id: number;
   quantity: number;
