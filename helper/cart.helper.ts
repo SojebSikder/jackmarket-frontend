@@ -4,7 +4,7 @@ import { CookieHelper } from "./cookie.helper";
 import { StringHelper } from "./string.helper";
 
 export type CartOption = {
-  id?: string; // for internal use
+  id?: number; // for internal use
   product_id: number;
   quantity: number;
   attribute?: any;
@@ -18,8 +18,15 @@ export class CartHelper {
    * @param {*} items
    */
   static store(items: CartOption, callback?: Function) {
+    const id = 1;
+    // const cartData: CartOption = {
+    //   id: generateCode(16),
+    //   product_id: items.product_id,
+    //   quantity: items.quantity,
+    //   attribute: items.attribute,
+    // };
     const cartData: CartOption = {
-      id: generateCode(16),
+      id: id,
       product_id: items.product_id,
       quantity: items.quantity,
       attribute: items.attribute,
@@ -32,6 +39,12 @@ export class CartHelper {
         ? []
         : JSON.parse(CookieHelper.get({ key: "carts" }));
 
+    if (data.length > 0) {
+      const last_item_id = data.slice(data.length - 1);
+      if (last_item_id[0].id) {
+        cartData.id = last_item_id[0].id + 1;
+      }
+    }
     // check if duplicate product exist
     const existingProduct = data.find(
       (dt) => dt.product_id == cartData.product_id
@@ -52,6 +65,37 @@ export class CartHelper {
     CookieHelper.set({ key: "carts", value: JSON.stringify(data) });
     if (callback) {
       callback();
+    }
+  }
+
+  /**
+   * Update product items to session cart
+   * @param {*} items
+   */
+  static update(id: number, quantity: number, callback?: Function) {
+    let data: CartOption[] = [];
+
+    data =
+      CookieHelper.get({ key: "carts" }) == null
+        ? []
+        : JSON.parse(CookieHelper.get({ key: "carts" }));
+
+    // check if product exist
+    const existingProduct = data.find((dt) => dt.id == id);
+
+    if (existingProduct) {
+      // update quantity if exists
+      data = data.map((dt) => {
+        if (existingProduct.id == dt.id) {
+          dt.quantity = quantity;
+        }
+        return { ...dt };
+      });
+
+      CookieHelper.set({ key: "carts", value: JSON.stringify(data) });
+      if (callback) {
+        callback();
+      }
     }
   }
 

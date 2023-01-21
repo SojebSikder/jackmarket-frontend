@@ -49,8 +49,14 @@ export default function Index({
   cartsData: any[];
 }) {
   const [carts, setCarts] = useState(cartsData);
+  const [isUpdateQuantity, setIsUpdateQuantity] = useState(0);
+
+  const _cartUpdateState = (product_id: number) => {
+    setIsUpdateQuantity(product_id);
+  };
 
   const increaseQuantity = (product_id: number) => {
+    _cartUpdateState(product_id);
     setCarts((prev) => {
       return prev.map((cart) => {
         if (cart.product_id == product_id) {
@@ -62,6 +68,7 @@ export default function Index({
     });
   };
   const decreaseQuantity = (product_id: number) => {
+    _cartUpdateState(product_id);
     setCarts((prev) => {
       return prev.map((cart) => {
         if (cart.product_id == product_id) {
@@ -75,6 +82,18 @@ export default function Index({
         }
       });
     });
+  };
+
+  const updateCart = async (id: number, quantity: number) => {
+    // hide the save button
+    CartHelper.update(id, quantity);
+    _cartUpdateState(0);
+
+    const updatedCart = await CartHelper.findAll();
+
+    if (updatedCart) {
+      setCarts(updatedCart);
+    }
   };
 
   return (
@@ -113,15 +132,30 @@ export default function Index({
                         <tr key={cart.id}>
                           <td>{cart.product.name}</td>
                           <td>
-                            <QuantityButton
-                              onDecrease={() =>
-                                decreaseQuantity(cart.product_id)
-                              }
-                              onIncrease={() =>
-                                increaseQuantity(cart.product_id)
-                              }
-                              value={cart.quantity}
-                            />
+                            <div className="d-flex">
+                              <QuantityButton
+                                onDecrease={() =>
+                                  decreaseQuantity(cart.product_id)
+                                }
+                                onIncrease={() =>
+                                  increaseQuantity(cart.product_id)
+                                }
+                                value={cart.quantity}
+                              />
+                              {isUpdateQuantity == cart.product_id ? (
+                                <div style={{ marginLeft: "10px" }}>
+                                  <CustomButton
+                                    onClick={(e) =>
+                                      updateCart(cart.id, cart.quantity)
+                                    }
+                                  >
+                                    Save
+                                  </CustomButton>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
                           </td>
                           <td>{cart.product.price}</td>
                           <td>{cart.subtotal}</td>
