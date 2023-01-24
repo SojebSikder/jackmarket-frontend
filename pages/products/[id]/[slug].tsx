@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import Navbar from "../../../components/partial/header/Navbar";
 import Sidebar from "../../../components/partial/sidebar/Sidebar";
@@ -12,6 +12,7 @@ import CustomCarousel from "../../../components/resuable/custom/CustomCarousel";
 import CustomButton from "../../../components/resuable/custom/CustomButton";
 import Meta from "../../../components/partial/header/Meta";
 import { CartHelper } from "../../../helper/cart.helper";
+import CustomToast from "../../../components/resuable/custom/CustomToast";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -52,6 +53,15 @@ export default function Index({
   settings: any;
   host: string;
 }) {
+  const [showToast, setShowToast] = useState(false);
+
+  const handleShowToast = () => {
+    setShowToast(true);
+  };
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
+
   const addToCart = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
@@ -61,7 +71,9 @@ export default function Index({
     };
 
     // session based cart
-    CartHelper.store(data);
+    CartHelper.store(data, function () {
+      handleShowToast();
+    });
   };
 
   return (
@@ -88,6 +100,9 @@ export default function Index({
       <Sidebar categoryData={categoryData} />
       <Main>
         <Container>
+          <CustomToast show={showToast} onClose={handleCloseToast}>
+            Product added to Cart
+          </CustomToast>
           <div className="row">
             <div className="col">
               <CustomCarousel images={productData.images} />

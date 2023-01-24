@@ -8,6 +8,13 @@ export type CartOption = {
   product_id: number;
   quantity: number;
   attribute?: any;
+  // generate
+  subtotal?: number;
+};
+
+export type CartMeta = {
+  subtotal: number;
+  data: CartOption[];
 };
 /**
  * CartHelper - Session based cart
@@ -209,7 +216,7 @@ export class CartHelper {
               }
 
               Object.assign(item, {
-                subtotal: total,
+                subtotal: total * item.quantity,
               });
               return item;
             } catch (error) {
@@ -224,6 +231,29 @@ export class CartHelper {
     } catch (error) {
       console.log(CartHelper.removeAll());
       return [];
+    }
+  }
+
+  /**
+   * Display all cart data with products from session cart
+   * @returns
+   */
+  static async cartData(context = null): Promise<CartMeta> {
+    const cartData: CartMeta = { data: [], subtotal: 0 };
+    const _cartData = await this.findAll(context);
+    if (_cartData) {
+      Object.assign(cartData, { data: _cartData });
+
+      let subtotal = 0;
+      for (const cart of _cartData) {
+        subtotal += Number(cart.subtotal);
+      }
+
+      Object.assign(cartData, { subtotal: subtotal });
+
+      return cartData;
+    } else {
+      return cartData;
     }
   }
 
