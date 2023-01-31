@@ -18,6 +18,7 @@ import QuantityButton from "../../components/resuable/product/QuantityButton";
 import { useEffect, useReducer, useState } from "react";
 import CustomToast from "../../components/resuable/custom/CustomToast";
 import { AppConfig } from "../../config/app.config";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -49,6 +50,7 @@ export default function Index({
   host: string;
   cartData: CartMeta;
 }) {
+  const router = useRouter();
   const [cartMeta, setCartMeta] = useState({ subtotal: cartData.subtotal });
   const [carts, setCarts] = useState(cartData.data);
   const [isUpdateQuantity, setIsUpdateQuantity] = useState(0);
@@ -113,6 +115,10 @@ export default function Index({
   };
   const totalCost = () => {
     return subtotalCost();
+  };
+
+  const handleCheckout = () => {
+    router.push(`/checkout-info`);
   };
 
   return (
@@ -206,27 +212,30 @@ export default function Index({
                         <span className="fw-bold">{totalCost()}</span>
                       </div>
                     </div>
-                    <div className="d-flex justify-content-between">
+                    {/* <div className="d-flex justify-content-between">
                       <div>
                         <span>Delivery fee</span>
                       </div>
                       <div>
                         <span>$1.00</span>
                       </div>
-                    </div>
+                    </div> */}
                     <hr />
                     <div className="d-flex justify-content-between">
                       <div>
-                        <span className="fw-bold">Subtotal</span>
+                        <span className="fw-bold">Total</span>
                       </div>
                       <div>
-                        <span className="fw-bold">{subtotalCost()}</span>
+                        <span className="fw-bold">{totalCost()}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-3">
-                    <CustomButton style={{ width: "100%", height: "54px" }}>
+                    <CustomButton
+                      onClick={handleCheckout}
+                      style={{ width: "100%", height: "54px" }}
+                    >
                       Checkout
                     </CustomButton>
                   </div>
