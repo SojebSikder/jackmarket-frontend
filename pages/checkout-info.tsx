@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import { Alert, Button, Container, Tab, Tabs } from "react-bootstrap";
 import Navbar from "../components/partial/header/Navbar";
 import Sidebar from "../components/partial/sidebar/Sidebar";
