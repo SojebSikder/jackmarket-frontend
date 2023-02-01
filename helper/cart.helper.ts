@@ -92,7 +92,7 @@ export class CartHelper {
 
     if (existingProduct) {
       if (quantity <= 0) {
-        data = data.reduce(function (prev, current) {
+        data = data.reduce(function (prev: any[], current) {
           if (current.id != id) {
             prev.push(current);
           }
