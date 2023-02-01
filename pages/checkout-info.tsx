@@ -89,13 +89,14 @@ export default function Index({
       };
       try {
         const checkoutService = await CheckoutService.store(data);
-        if (!checkoutService.data.error) {
-          setMessage(checkoutService.data.message);
+
+        if (!checkoutService.error) {
+          setMessage(checkoutService.message);
           setLoading(false);
-          const checkout_id = checkoutService.data.data.checkout_id;
+          const checkout_id = checkoutService.data.checkout_id;
           router.push(`/checkout?checkout_id=${checkout_id}`);
         } else {
-          setMessage(checkoutService.data.message);
+          setMessage(checkoutService.message);
           setLoading(false);
           submitBtn.disabled = false;
         }
@@ -179,7 +180,6 @@ export default function Index({
                   </div>
                   <div>
                     <CustomButton
-                      onClick={handleCheckout}
                       type="submit"
                       name="submitBtn"
                       style={{ width: "100%", height: "54px" }}
