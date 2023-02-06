@@ -417,19 +417,39 @@ export default function Index({
                           onChange={handleTextInputBilling}
                         />
                       </div>
-
-                      <div className="mt-4">
-                        <CustomButton
-                          type="submit"
-                          name="submitBtn"
-                          style={{ width: "100%", height: "54px" }}
-                          onClick={handleCheckout}
-                        >
-                          Place order
-                        </CustomButton>
-                      </div>
                     </div>
                   )}
+
+                  {/* payment saction */}
+                  <div className="mt-3">
+                    <div>
+                      <select
+                        className="form-control"
+                        name="country_id"
+                        onChange={handleTextInputBilling}
+                      >
+                        <option value={0}>Select payment type</option>
+                        {shippingData.payment_providers.map(
+                          (v: any, i: number) => (
+                            <option key={i} value={v.id}>
+                              {v.label}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <CustomButton
+                      type="submit"
+                      name="submitBtn"
+                      style={{ width: "100%", height: "54px" }}
+                      onClick={handleCheckout}
+                    >
+                      Place order
+                    </CustomButton>
+                  </div>
                 </div>
 
                 {/* product info */}
