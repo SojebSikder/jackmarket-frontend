@@ -1,4 +1,5 @@
 import { CartOption } from "../../helper/cart.helper";
+import { CookieHelper } from "../../helper/cookie.helper";
 import { Fetch } from "../../utils/Fetch";
 
 const config = {
@@ -32,6 +33,20 @@ export class CheckoutService {
       shipping_zone_id,
     };
     const res = await Fetch.post(`/checkout`, data, config);
+    return res.data;
+  }
+
+  static async findOne(id: number, context = null) {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    const res = await Fetch.get(`/checkout/${id}`, _config);
     return res.data;
   }
 }
