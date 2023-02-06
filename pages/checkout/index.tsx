@@ -422,6 +422,12 @@ export default function Index({
 
                   {/* payment saction */}
                   <div className="mt-3">
+                    <div
+                      className="mb-3"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Payment info
+                    </div>
                     <div>
                       <select
                         className="form-control"
