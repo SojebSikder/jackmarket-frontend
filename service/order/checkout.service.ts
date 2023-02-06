@@ -36,7 +36,7 @@ export class CheckoutService {
     return res.data;
   }
 
-  static async findOne(id: number, context = null) {
+  static async findOne(id: string, context = null) {
     const userToken = CookieHelper.get({ key: "token", context });
 
     const _config = {

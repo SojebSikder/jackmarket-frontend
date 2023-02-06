@@ -22,6 +22,7 @@ import { CheckoutService } from "../../service/order/checkout.service";
 import CustomImage from "../../components/resuable/custom/CustomImage";
 import { ShippingService } from "../../service/setting/shipping.service";
 import { getUser } from "../../utils/UserDetails";
+import { OrderService } from "../../service/order/order.service";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -73,6 +74,8 @@ export default function Index({
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [error_message, setError_message] = useState<string>();
+  const [showDialog, setShowDialog] = useState(false);
 
   const [billingAddress, setBillingAddress] = useState(1);
   const [storeCredit, setStoreCredit] = useState(false);
@@ -84,21 +87,22 @@ export default function Index({
   });
 
   const [textInputShipping, setTextInputShipping] = useState({
-    name: userDetails && `${userDetails.fname} ${userDetails.lname}`,
-    country: "",
+    fname: userDetails ? `${userDetails.fname}` : "",
+    lname: userDetails ? `${userDetails.lname}` : "",
+    country: 0,
     address1: "",
     address2: "",
     city: "",
     state: "",
     zip: "",
-    phone_dial_code: userDetails && `${userDetails.dial_code ?? ""}`,
-    phone: userDetails && `${userDetails.phone ?? ""}`,
-    email: userDetails && `${userDetails.email ?? ""}`,
+    phone: userDetails ? `${userDetails.phone ?? ""}` : "",
+    email: userDetails ? `${userDetails.email ?? ""}` : "",
   });
 
   const [textInputBilling, setTextInputBilling] = useState({
-    name: "",
-    country: "",
+    fname: "",
+    lname: "",
+    country: 0,
     address1: "",
     address2: "",
     city: "",
@@ -135,53 +139,69 @@ export default function Index({
     setShowToast(false);
   };
 
-  const handleCheckout = async (e: any) => {
-    e.preventDefault();
+  const handleShowDialog = (message?: string) => {
+    if (message) {
+      setError_message(message);
+    }
+    setShowDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
 
+  const handleCheckout = async () => {
     setMessage(null);
     setLoading(true);
+    handleShowDialog("Order processing. Please wait here...");
+    const data = {
+      checkout_id: String(cartData.data.uuid),
+      // shipping address
+      shipping_fname: textInputShipping.fname,
+      shipping_lname: textInputShipping.lname,
+      shipping_country: textInputShipping.country,
+      shipping_address1: textInputShipping.address1,
+      shipping_address2: textInputShipping.address2,
+      shipping_city: textInputShipping.city,
+      shipping_state: textInputShipping.state,
+      shipping_zip: textInputShipping.zip,
+      shipping_phone: textInputShipping.phone,
+      email: textInputShipping.email,
+      // billing address
+      billing: textInputBilling.billing,
+      billing_fname: textInputBilling.fname,
+      billing_lname: textInputBilling.lname,
+      billing_country: textInputBilling.country,
+      billing_address1: textInputBilling.address1,
+      billing_address2: textInputBilling.address2,
+      billing_city: textInputBilling.city,
+      billing_state: textInputBilling.state,
+      billing_zip: textInputBilling.zip,
+      // payment
+      shipping_zone_id: shippingData.data.id,
+      payment_provider_id: paymentMethod.id,
+    };
 
-    const fname = e.target.fname.value;
-    const lname = e.target.lname.value;
-    const email = e.target.email.value;
-    const mailing = e.target.mailing.checked;
-    const submitBtn = e.target.submitBtn;
+    // store to server
+    try {
+      const order = await OrderService.store(data);
+      if (!order.error) {
+        // success
+        handleShowDialog(order.message);
+        // remove session cart
+        CartHelper.removeAll();
 
-    submitBtn.disabled = true;
-
-    const cart_data = await CartHelper.findAll();
-    if (cart_data) {
-      const data = {
-        fname: fname,
-        lname: lname,
-        email: email,
-        mailing: mailing,
-        shipping_zone_id: undefined,
-        cart_data: cart_data,
-      };
-      try {
-        const checkoutService = await CheckoutService.store(data);
-
-        if (!checkoutService.error) {
-          setMessage(checkoutService.message);
-          setLoading(false);
-          const checkout_id = checkoutService.data.checkout_id;
-          router.push(`/checkout?checkout_id=${checkout_id}`);
-        } else {
-          setMessage(checkoutService.message);
-          setLoading(false);
-          submitBtn.disabled = false;
-        }
-      } catch (error: any) {
-        // return custom error message from API if any
-        if (error.response && error.response.data.message) {
-          setMessage(error.response.data.message);
-          setLoading(false);
-        } else {
-          setMessage(error.message);
-          setLoading(false);
-        }
-        submitBtn.disabled = false;
+        window.location.href = `/thankyou?message=${encodeURIComponent(
+          order.message
+        )}`;
+      } else {
+        handleShowDialog(order.message);
+      }
+    } catch (error: any) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        handleShowDialog(error.response.data.message);
+      } else {
+        handleShowDialog(error.message);
       }
     }
   };
