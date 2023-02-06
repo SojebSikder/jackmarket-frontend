@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import { CheckoutService } from "../../service/order/checkout.service";
 import CustomImage from "../../components/resuable/custom/CustomImage";
 import { ShippingService } from "../../service/setting/shipping.service";
+import { getUser } from "../../utils/UserDetails";
 
 export const getServerSideProps = async (context: any) => {
   const { req, query, res, asPath, pathname } = context;
@@ -28,6 +29,7 @@ export const getServerSideProps = async (context: any) => {
   const checkout_id = query.checkout_id;
 
   const settings = await getSetting();
+  const userDetails = await getUser(context);
 
   const footerService = await FooterService.findAll();
   const footerData = footerService.data;
@@ -47,6 +49,7 @@ export const getServerSideProps = async (context: any) => {
       host: req.headers.host,
       cartData: cartData,
       shippingData: shippingData,
+      userDetails: userDetails,
     },
   };
 };
@@ -57,17 +60,65 @@ export default function Index({
   host,
   cartData,
   shippingData,
+  userDetails,
 }: {
   footerData: any;
   settings: any;
   host: string;
   cartData: any;
   shippingData: any;
+  userDetails: any;
 }) {
   const router = useRouter();
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+  const [billingAddress, setBillingAddress] = useState(1);
+  const [storeCredit, setStoreCredit] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState({
+    id:
+      shippingData.payment_providers.length > 0 &&
+      shippingData.payment_providers[0].id,
+    name: "",
+  });
+
+  const [textInputShipping, setTextInputShipping] = useState({
+    name: userDetails && `${userDetails.fname} ${userDetails.lname}`,
+    country: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone_dial_code: userDetails && `${userDetails.dial_code ?? ""}`,
+    phone: userDetails && `${userDetails.phone ?? ""}`,
+    email: userDetails && `${userDetails.email ?? ""}`,
+  });
+
+  const [textInputBilling, setTextInputBilling] = useState({
+    name: "",
+    country: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+    billing: 0,
+  });
+
+  const handleTextInputShipping = (event: any) => {
+    setTextInputShipping({
+      ...textInputShipping,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleTextInputBilling = (event: any) => {
+    setTextInputBilling({
+      ...textInputBilling,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const totalCost = () => {
     if (shippingData) {
@@ -158,90 +209,227 @@ export default function Index({
               >
                 Checkout
               </div>
+              {loading && <div>Please wait...</div>}
+              {message && <div>{message}</div>}
               <div className="d-flex">
                 <div className="d-flex flex-column w-50">
-                  {/* shiping info */}
-                  <div
-                    className="mb-3"
-                    style={{ fontSize: "20px", fontWeight: "bold" }}
-                  >
-                    Shipping info
-                  </div>
-                  {loading && <div>Please wait...</div>}
-                  {message && <div>{message}</div>}
-                  <form onSubmit={handleCheckout} method="post">
+                  <div>
+                    {/* shiping info */}
+                    <div
+                      className="mb-3"
+                      style={{ fontSize: "20px", fontWeight: "bold" }}
+                    >
+                      Shipping info
+                    </div>
+
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="fname"
+                        name="shipping_fname"
                         placeholder="First name"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="lname"
+                        name="shipping_lname"
                         placeholder="Last name"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="email"
+                        name="shipping_email"
                         placeholder="Email"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
-                      <select className="form-control" name="country_id" id="">
-                        <option value="">Bangladesh</option>
+                      <select
+                        className="form-control"
+                        name="country_id"
+                        onChange={handleTextInputShipping}
+                      >
+                        <option value={0}>Select country</option>
+                        {shippingData.countries.map((v: any, i: number) => (
+                          <option key={i} value={v.id}>
+                            {v.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="address1"
+                        name="shipping_address1"
                         placeholder="Address"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="address2"
+                        name="shipping_address2"
                         placeholder="Apartment, suite, etc. (optional)"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="city"
+                        name="shipping_city"
                         placeholder="City"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
                     <div className="mb-2">
                       <input
                         className="form-control"
                         type="text"
-                        name="postal_code"
+                        name="shipping_postal_code"
                         placeholder="Postal code"
+                        onChange={handleTextInputShipping}
                       />
                     </div>
+                  </div>
 
+                  <div onChange={(e) => handleTextInputBilling(e)}>
                     <div>
-                      <CustomButton
-                        type="submit"
-                        name="submitBtn"
-                        style={{ width: "100%", height: "54px" }}
-                      >
-                        Place order
-                      </CustomButton>
+                      <input
+                        type="radio"
+                        name="billing"
+                        id="sameBilling"
+                        value={0}
+                        checked={textInputBilling.billing == 0 ? true : false}
+                        readOnly
+                      />
+                      <label className="ms-2" htmlFor="sameBilling">
+                        Same as shipping address
+                      </label>
                     </div>
-                  </form>
+                    <div>
+                      <input
+                        type="radio"
+                        name="billing"
+                        id="differentBilling"
+                        value={1}
+                        checked={textInputBilling.billing == 1 ? true : false}
+                        readOnly
+                      />
+                      <label className="ms-2" htmlFor="differentBilling">
+                        Use a different billing address
+                      </label>
+                    </div>
+                  </div>
+
+                  {textInputBilling.billing == 1 && (
+                    <div>
+                      {/* shiping info */}
+                      <div
+                        className="mb-3"
+                        style={{ fontSize: "20px", fontWeight: "bold" }}
+                      >
+                        Billing info
+                      </div>
+
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_fname"
+                          placeholder="First name"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_lname"
+                          placeholder="Last name"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_email"
+                          placeholder="Email"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <select
+                          className="form-control"
+                          name="country_id"
+                          onChange={handleTextInputBilling}
+                        >
+                          <option value={0}>Select country</option>
+                          {shippingData.countries.map((v: any, i: number) => (
+                            <option key={i} value={v.id}>
+                              {v.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_address1"
+                          placeholder="Address"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_address2"
+                          placeholder="Apartment, suite, etc. (optional)"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_city"
+                          placeholder="City"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="billing_postal_code"
+                          placeholder="Postal code"
+                          onChange={handleTextInputBilling}
+                        />
+                      </div>
+
+                      <div className="mt-4">
+                        <CustomButton
+                          type="submit"
+                          name="submitBtn"
+                          style={{ width: "100%", height: "54px" }}
+                          onClick={handleCheckout}
+                        >
+                          Place order
+                        </CustomButton>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* product info */}
