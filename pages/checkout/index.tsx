@@ -72,9 +72,9 @@ export default function Index({
 }) {
   const router = useRouter();
   const [message, setMessage] = useState(null);
+  const [error_message, setError_message] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [error_message, setError_message] = useState<string>();
   const [showDialog, setShowDialog] = useState(false);
 
   const [billingAddress, setBillingAddress] = useState(1);
@@ -139,7 +139,7 @@ export default function Index({
     setShowToast(false);
   };
 
-  const handleShowDialog = (message?: string) => {
+  const handleShowDialog = (message?: any) => {
     if (message) {
       setError_message(message);
     }
@@ -151,8 +151,10 @@ export default function Index({
 
   const handleCheckout = async () => {
     setMessage(null);
+    setError_message(null);
     setLoading(true);
     handleShowDialog("Order processing. Please wait here...");
+
     const data = {
       checkout_id: String(cartData.data.uuid),
       // shipping address
@@ -177,7 +179,7 @@ export default function Index({
       billing_state: textInputBilling.state,
       billing_zip: textInputBilling.zip,
       // payment
-      shipping_zone_id: shippingData.data.id,
+      shipping_zone_id: shippingData.id,
       payment_provider_id: paymentMethod.id,
     };
 
@@ -231,95 +233,98 @@ export default function Index({
               </div>
               {loading && <div>Please wait...</div>}
               {message && <div>{message}</div>}
+              {error_message && <div>{error_message}</div>}
               <div className="d-flex">
                 <div className="d-flex flex-column w-50">
-                  <div>
-                    {/* shiping info */}
-                    <div
-                      className="mb-3"
-                      style={{ fontSize: "20px", fontWeight: "bold" }}
-                    >
-                      Shipping info
-                    </div>
-
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_fname"
-                        placeholder="First name"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_lname"
-                        placeholder="Last name"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_email"
-                        placeholder="Email"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <select
-                        className="form-control"
-                        name="country_id"
-                        onChange={handleTextInputShipping}
+                  <form method="post">
+                    <div>
+                      {/* shiping info */}
+                      <div
+                        className="mb-3"
+                        style={{ fontSize: "20px", fontWeight: "bold" }}
                       >
-                        <option value={0}>Select country</option>
-                        {shippingData.countries.map((v: any, i: number) => (
-                          <option key={i} value={v.id}>
-                            {v.name}
-                          </option>
-                        ))}
-                      </select>
+                        Shipping info
+                      </div>
+
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="fname"
+                          placeholder="First name"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="lname"
+                          placeholder="Last name"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="email"
+                          placeholder="Email"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <select
+                          className="form-control"
+                          name="country_id"
+                          onChange={handleTextInputShipping}
+                        >
+                          <option value={0}>Select country</option>
+                          {shippingData.countries.map((v: any, i: number) => (
+                            <option key={i} value={v.id}>
+                              {v.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="address1"
+                          placeholder="Address"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="address2"
+                          placeholder="Apartment, suite, etc. (optional)"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="city"
+                          placeholder="City"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="postal_code"
+                          placeholder="Postal code"
+                          onChange={handleTextInputShipping}
+                        />
+                      </div>
                     </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_address1"
-                        placeholder="Address"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_address2"
-                        placeholder="Apartment, suite, etc. (optional)"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_city"
-                        placeholder="City"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="shipping_postal_code"
-                        placeholder="Postal code"
-                        onChange={handleTextInputShipping}
-                      />
-                    </div>
-                  </div>
+                  </form>
 
                   <div onChange={(e) => handleTextInputBilling(e)}>
                     <div>
@@ -351,93 +356,95 @@ export default function Index({
                   </div>
 
                   {textInputBilling.billing == 1 && (
-                    <div>
-                      {/* shiping info */}
-                      <div
-                        className="mb-3"
-                        style={{ fontSize: "20px", fontWeight: "bold" }}
-                      >
-                        Billing info
-                      </div>
-
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_fname"
-                          placeholder="First name"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_lname"
-                          placeholder="Last name"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_email"
-                          placeholder="Email"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <select
-                          className="form-control"
-                          name="country_id"
-                          onChange={handleTextInputBilling}
+                    <form method="post">
+                      <div>
+                        {/* shiping info */}
+                        <div
+                          className="mb-3"
+                          style={{ fontSize: "20px", fontWeight: "bold" }}
                         >
-                          <option value={0}>Select country</option>
-                          {shippingData.countries.map((v: any, i: number) => (
-                            <option key={i} value={v.id}>
-                              {v.name}
-                            </option>
-                          ))}
-                        </select>
+                          Billing info
+                        </div>
+
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="fname"
+                            placeholder="First name"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="lname"
+                            placeholder="Last name"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="email"
+                            placeholder="Email"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <select
+                            className="form-control"
+                            name="country"
+                            onChange={handleTextInputBilling}
+                          >
+                            <option value={0}>Select country</option>
+                            {shippingData.countries.map((v: any, i: number) => (
+                              <option key={v.id} value={v.id}>
+                                {v.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="address1"
+                            placeholder="Address"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="address2"
+                            placeholder="Apartment, suite, etc. (optional)"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="city"
+                            placeholder="City"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="postal_code"
+                            placeholder="Postal code"
+                            onChange={handleTextInputBilling}
+                          />
+                        </div>
                       </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_address1"
-                          placeholder="Address"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_address2"
-                          placeholder="Apartment, suite, etc. (optional)"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_city"
-                          placeholder="City"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <input
-                          className="form-control"
-                          type="text"
-                          name="billing_postal_code"
-                          placeholder="Postal code"
-                          onChange={handleTextInputBilling}
-                        />
-                      </div>
-                    </div>
+                    </form>
                   )}
 
                   {/* payment saction */}
@@ -451,13 +458,18 @@ export default function Index({
                     <div>
                       <select
                         className="form-control"
-                        name="country_id"
+                        name="country"
                         onChange={handleTextInputBilling}
                       >
                         <option value={0}>Select payment type</option>
                         {shippingData.payment_providers.map(
                           (v: any, i: number) => (
-                            <option key={i} value={v.id}>
+                            // paymentMethod.id == provider.id
+                            <option
+                              key={v.id}
+                              value={v.id}
+                              selected={paymentMethod.id == v.id ? true : false}
+                            >
                               {v.label}
                             </option>
                           )

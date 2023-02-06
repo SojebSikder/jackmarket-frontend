@@ -1,4 +1,3 @@
-import { CartOption } from "../../helper/cart.helper";
 import { CookieHelper } from "../../helper/cookie.helper";
 import { Fetch } from "../../utils/Fetch";
 
@@ -65,6 +64,15 @@ export class OrderService {
     },
     context = null
   ) {
+    const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
     const data = {
       checkout_id,
       // shipping address
@@ -92,7 +100,8 @@ export class OrderService {
       shipping_zone_id,
       payment_provider_id,
     };
-    const res = await Fetch.post(`/order`, data, config);
+
+    const res = await Fetch.post(`/order`, data, _config);
     return res.data;
   }
 
