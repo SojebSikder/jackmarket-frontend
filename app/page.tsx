@@ -1,3 +1,11 @@
-export default function Home() {
-  return <h1>Hello </h1>;
-}
+
+const page = () => {
+  return (
+    <div>
+      <h2>hi</h2>
+      
+    </div>
+  );
+};
+
+export default page;
