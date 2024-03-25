@@ -1,9 +1,10 @@
+import RootNavbar from "../components/home_comp/RootNavbar";
 
 const page = () => {
   return (
     <div>
-      <h2>hi</h2>
       
+      <RootNavbar/>
     </div>
   );
 };
