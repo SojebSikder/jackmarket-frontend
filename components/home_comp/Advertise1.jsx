@@ -1,6 +1,6 @@
 import Image from "next/image";
 //image from
-import advertiseImage from "../../assets/Advertisement/landingBanner.png";
+import advertiseImage from "../../public/Advertisement/landingBanner.png";
 
 const Advertise1 = () => {
   return (

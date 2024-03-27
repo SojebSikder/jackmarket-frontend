@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 import Button from './../common/Button';
-import image from '../../assets/Delivery/world-map.png';
+import image from "../../public/Delivery/world-map.png";
 const Delivery = () => {
     return (
       <div className=" flex justify-center items-center gap-32 px-32 my-32">
@@ -14,7 +14,7 @@ const Delivery = () => {
             we’re on our way to <br /> deliver your groceries! Sign up now to <br /> stay in
             the know.
           </p>
-          <Button children={"Start Shopping"} />
+          <Button >Start Shopping</Button>
           <p className='mt-10 text-lg text-gray-500'>
             City not listed? <span className=' text-secondary underline cursor-pointer'>Signup for our waitlist</span>
           </p>

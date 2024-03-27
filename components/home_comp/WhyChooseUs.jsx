@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SectionTitle from "../common/SectionTitle";
-import image from "../../assets/WhyChooseUs/whychooseUsIamge.png";
+import image from "../../public/WhyChooseUs/whychooseUsIamge.png";
 import Button from "../common/Button";
 
 const WhyChooseUs = () => {
