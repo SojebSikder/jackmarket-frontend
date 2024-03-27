@@ -22,7 +22,7 @@ const DownloadApp = () => {
           <Image alt="" src={appleStore} className=" w-48 object-cover " />
         </div>
         <div>
-          <Image alt="" src={iphoneImage} className=" object-cover" />
+          <Image alt="" src={iphoneImage} className=" object-cover w-[418px]" />
         </div>
       </div>
     );
