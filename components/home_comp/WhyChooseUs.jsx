@@ -58,7 +58,7 @@ const WhyChooseUs = () => {
         </div>
       </div>
       <div className=" text-center my-10">
-        <Button children={"Start Shopping"} />
+        <Button>Start Shopping</Button>
       </div>
     </div>
   );

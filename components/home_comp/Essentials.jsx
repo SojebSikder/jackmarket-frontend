@@ -37,7 +37,7 @@ const Essentials = () => {
           </div>
         </div>
         <div className=" text-center">
-          <Button children={"Explore categories"} />
+          <Button>Explore categories</Button>
         </div>
       </div>
     );
