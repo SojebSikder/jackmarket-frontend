@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../assets/logo/jacmarketIcon.png";
+import logo from "../../public/logo/jacmarketIcon.png";
 import Button from './../common/Button';
 
 const Banner = () => {

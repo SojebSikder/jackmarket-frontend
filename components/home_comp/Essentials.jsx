@@ -2,10 +2,10 @@ import Image from "next/image";
 import Button from "../common/Button";
 import SectionTitle from "../common/SectionTitle";
 //image import from
-import image from "../../assets/Essentials/image.png";
-import image1 from "../../assets/Essentials/image (1).png";
-import image2 from "../../assets/Essentials/image (2).png";
-import image3 from "../../assets/Essentials/image (3).png";
+import image from "../../public/Essentials/image.png";
+import image1 from "../../public/Essentials/image (1).png";
+import image2 from "../../public/Essentials/image (2).png";
+import image3 from "../../public/Essentials/image (3).png";
 
 
 
