@@ -16,7 +16,7 @@ const Banner = () => {
           your door, and within minutes.{" "}
         </p>
 
-        <Button children={'Shop now'}/>
+        <Button>Shop now</Button>
         
 
       </div>
