@@ -9,6 +9,7 @@ const page = () => {
       <RootNavbar />
       <Banner/>
       <Essentials/>
+      
 
     </div>
   );

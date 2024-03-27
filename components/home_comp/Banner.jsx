@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logo from "../../assets/logo/jacmarketIcon.png";
+import Button from './../common/Button';
 
 const Banner = () => {
   return (
@@ -15,9 +16,9 @@ const Banner = () => {
           your door, and within minutes.{" "}
         </p>
 
-        <button className=" rounded p-2 px-4 font-semibold text-white bg-primary">
-          Shop now
-        </button>
+        <Button children={'Shop now'}/>
+        
+
       </div>
       <div className=" flex-1"></div>
     </div>
