@@ -3,6 +3,7 @@ import Banner from "../components/home_comp/Banner";
 import Essentials from './../components/home_comp/Essentials';
 import Advertise1 from './../components/home_comp/Advertise1';
 import WhyChooseUs from './../components/home_comp/WhyChooseUs';
+import Delivery from './../components/home_comp/Delivery';
 
 const page = () => {
 
@@ -13,6 +14,7 @@ const page = () => {
       <Essentials/>
       <Advertise1/>
       <WhyChooseUs/>
+      <Delivery/>
       
 
     </div>
