@@ -1,7 +1,7 @@
 
 
-import '../JoinUs/joinUs.css'
-import Button from './../../common/Button';
+
+import Button from '../common/Button';
 
 const JoinUs = () => {
     return (
