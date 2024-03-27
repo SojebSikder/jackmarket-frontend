@@ -4,7 +4,8 @@ import Essentials from './../components/home_comp/Essentials';
 import Advertise1 from './../components/home_comp/Advertise1';
 import WhyChooseUs from './../components/home_comp/WhyChooseUs';
 import Delivery from './../components/home_comp/Delivery';
-import JoinUs from '../components/home_comp/JoinUs/JoinUs';
+import JoinUs from '../components/home_comp/JoinUs';
+import DownloadApp from './../components/home_comp/DownloadApp';
 
 
 
@@ -19,6 +20,7 @@ const page = () => {
       <WhyChooseUs/>
       <Delivery/>
       <JoinUs/>
+      <DownloadApp/>
       
       
 
