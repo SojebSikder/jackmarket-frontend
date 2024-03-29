@@ -7,14 +7,14 @@ const JoinUs = () => {
     return (
       <div>
         {/* country */}
-        <div className=" lg:flex  items-center gap-10 mb-10 lg:px-32">
-          <p className=" p-2 px-8 bg-[#D1DBF1] text-secondary rounded font-semibold ">
+        <div className=" flex  items-center md:gap-10 gap-3  mb-10 lg:px-32 md:px-10 px-5">
+          <p className=" p-2 md:px-8 px-4  md:text-base text-xs bg-[#D1DBF1] text-secondary rounded font-semibold ">
             Germany
           </p>
-          <p className=" p-2 px-8 my-5 md:my-0 bg-[#D1DBF1] text-secondary rounded font-semibold ">
+          <p className=" p-2 md:px-8 px-4 md:text-base text-xs my-5 md:my-0 bg-[#D1DBF1] text-secondary rounded font-semibold ">
             France
           </p>
-          <p className=" p-2 px-8 bg-[#D1DBF1] text-secondary rounded font-semibold ">
+          <p className=" p-2 md:px-8 px-4 md:text-base text-xs bg-[#D1DBF1] text-secondary rounded font-semibold ">
             Netherlands
           </p>
         </div>

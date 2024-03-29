@@ -5,9 +5,9 @@ import Button from "../common/Button";
 
 const WhyChooseUs = () => {
   return (
-    <div>
+    <div className="my-14">
       <SectionTitle title={"Why you'll love us"} />
-      <div className=" flex justify-center gap-20 px-32 my-20  text-center ">
+      <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center gap-20 lg:px-32 md:px-20 px-10 my-20  text-center ">
         <div className="mx-auto ">
           <Image
             className="mx-auto "
@@ -57,7 +57,7 @@ const WhyChooseUs = () => {
           </p>
         </div>
       </div>
-      <div className=" text-center my-10">
+      <div className=" text-center mt-10">
         <Button>Start Shopping</Button>
       </div>
     </div>
