@@ -5,7 +5,7 @@ import iphoneImage from '../../public/DownloadApp/iphoneImage.png'
 
 const DownloadApp = () => {
     return (
-      <div className=" flex justify-between items-center  lg:px-32 pt-20 h-screen">
+      <div className=" md:flex  justify-between items-center  lg:px-32 md:px-20 px-10 md:pt-20 lg:pb-0 md:pb-12 h-screen">
         <div>
           <h1 className=" font-bold text-3xl text-secondary pt-10 pb-10 ">
             Download Jeckmarket now.
@@ -17,12 +17,20 @@ const DownloadApp = () => {
           <Image
             alt=""
             src={googlePlayImage}
-            className=" w-48 object-cover mb-5"
+            className=" lg:w-48 md:w-28 w-20 object-cover mb-5"
           />
-          <Image alt="" src={appleStore} className=" w-48 object-cover " />
+          <Image
+            alt=""
+            src={appleStore}
+            className=" lg:w-48 md:w-28 w-20 object-cover "
+          />
         </div>
         <div>
-          <Image alt="" src={iphoneImage} className=" object-cover w-[418px]" />
+          <Image
+            alt=""
+            src={iphoneImage}
+            className=" object-cover lg:w-[418px]"
+          />
         </div>
       </div>
     );

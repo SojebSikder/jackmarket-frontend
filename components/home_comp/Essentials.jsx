@@ -18,21 +18,21 @@ const Essentials = () => {
             "Tap your way from aisle to aisle and order what you need, when you need it."
           }
         />
-        <div className=" flex justify-center gap-20  px-32 py-10  text-center ">
+        <div className=" grid lg:grid-cols-4 grid-cols-2 gap-5   md:px-32 px-10   py-10  text-center ">
           <div>
-            <Image src={image} alt="Alcohol-free Drinks" />
+            <Image src={image} alt="Alcohol-free Drinks" className="mx-auto" />
             <p className="my-2">Alcohol-free Drinks</p>
           </div>
           <div>
-            <Image src={image1} alt="Baked Goods" />
+            <Image src={image1} alt="Baked Goods" className="mx-auto" />
             <p className="my-2">Baked Goods</p>
           </div>
           <div>
-            <Image src={image2} alt="Eggs & Dairy" />
+            <Image src={image2} alt="Eggs & Dairy" className="mx-auto" />
             <p className="my-2">Eggs & Dairy</p>
           </div>
           <div>
-            <Image src={image3} alt="Vegetables" />
+            <Image src={image3} alt="Vegetables" className="mx-auto" />
             <p className="my-2">Vegetables</p>
           </div>
         </div>

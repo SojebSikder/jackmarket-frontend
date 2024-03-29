@@ -8,12 +8,12 @@ import linkedin from "../../public/SocialIcon/Linkedin 1.png";
 
 const Footer = () => {
     return (
-      <div className=" border-t border-black lg:pt-14 ">
-        <div className="lg:px-20 flex items-start justify-between lg:gap-52">
+      <div className=" border-t border-black md:pt-14 pt-10 ">
+        <div className="md:px-20 px-10  md:flex items-start justify-between lg:gap-52">
           <Image
             src={logo}
             alt=" jacmarket Icon"
-            className="w-12 h-12 object-cover "
+            className="w-12 h-12 lg:mr-0 md:mr-16 md:mb-0 mb-5 object-cover "
           />
           <div className=" grid grid-cols-3 gap-20  flex-1">
             {/* about*/}
@@ -53,8 +53,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="bg-black h-[1px] my-7 mx-20 opacity-50  "></div>
-        <div className='text-secondary flex items-center justify-center gap-5 font-semibold  mb-5'>
+        <div className="bg-black h-[1px] my-7 md:mx-20 mx-10 opacity-50  "></div>
+        <div className='text-secondary md:flex items-center justify-center gap-5 font-semibold  mb-5 text-center'>
           <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>©  2022 Jeckmarket</p>
           <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Imprint</p>
           <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Terms of conditions</p>
