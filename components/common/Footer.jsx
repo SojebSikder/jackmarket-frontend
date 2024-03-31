@@ -8,7 +8,7 @@ import linkedin from "../../public/SocialIcon/Linkedin 1.png";
 
 const Footer = () => {
     return (
-      <div className=" border-t border-black md:pt-14 pt-10 ">
+      <div className=" border-t  border-gray-500 md:pt-14 pt-10 pb-5 ">
         <div className="md:px-20 px-10  md:flex items-start justify-between lg:gap-52">
           <Image
             src={logo}
@@ -53,13 +53,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="bg-black h-[1px] my-7 md:mx-20 mx-10 opacity-50  "></div>
-        <div className='text-secondary md:flex items-center justify-center gap-5 font-semibold  mb-5 text-center'>
-          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>©  2022 Jeckmarket</p>
-          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Imprint</p>
-          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Terms of conditions</p>
-          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Privacy</p>
-          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-100 active:scale-95 '>Cookie settings</p>
+        <div className=" border-[0.1px] border-gray-400  md:mx-20 mx-10  my-4  "></div>
+        <div className='text-secondary md:flex items-center justify-center gap-5 font-semibold text-center'>
+          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>©  2022 Jeckmarket</p>
+          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>Imprint</p>
+          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>Terms of conditions</p>
+          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>Privacy</p>
+          <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>Cookie settings</p>
         </div>
       </div>
     );
