@@ -5,8 +5,14 @@ import PacketIcon from "../../public/Dashboard/SideBar/PacketIcon.png";
 import BurgerIcon from "../../public/Dashboard/SideBar/BurgerIcon.png";
 import StickIcon from '../../public/Dashboard/SideBar/stickIcon.png'
 import Image from "next/image";
+import { useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+
+
 
 const NavLinks = ({ pathname, isActiveMenu }) => {
+  const [dropDownState, setDropDownState] = useState(false); 
   return (
     <div className="pl-2 py-4">
       <Link href="/">
@@ -46,17 +52,40 @@ const NavLinks = ({ pathname, isActiveMenu }) => {
 
       <Link
         href="/dashboard/frisch&fertig"
-        className={` ${
-          pathname === "/dashboard/frisch&fertig"
+        onClick={() => setDropDownState(!dropDownState)}
+        className={`${pathname === "/dashboard/frisch&fertig"
             ? "text-black font-semibold bg-gray-300 "
             : "text-gray-600 "
-        }`}
+          }`}
       >
         <h1 className="flex items-center gap-2 my-3 hover:tracking-[0.1em] duration-200 hover:scale-95">
           <Image src={BurgerIcon} alt="Home icon" />
           Frisch & Fertig
+          {dropDownState ? <IoIosArrowUp className="duration-150" /> : <IoIosArrowDown className="duration-150" />}
         </h1>
       </Link>
+      <div className="duration-300">
+        {dropDownState && (
+          <ul className="duration-300 ">
+            <li className="px-3 hover:tracking-[0.1em] duration-200 hover:scale-95">
+              <Link href="/dashboard/frisch&fertig"
+        className={` ${
+          pathname === "/dashboard/frisch&fertig/snacks"
+            ? "text-black font-semibold  "
+            : "text-gray-600 "
+        }`}>Obst- & Gemüse- <br /> Snacks</Link>
+            </li>
+            <li className="px-3 hover:tracking-[0.1em] duration-200 hover:scale-95">
+              <Link href="/dashboard/frisch&fertig"
+                className={` ${pathname === "/dashboard/frisch&fertig/suchi"
+                    ? "text-black font-semibold  "
+                    : "text-gray-600 "
+                  }`}>Sushi</Link>
+            </li>
+            
+          </ul>
+        )}
+      </div>
       <Link
         href="/dashboard/feinkost"
         className={` ${
