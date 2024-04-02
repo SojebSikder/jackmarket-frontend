@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import Button from './../common/Button';
+import Button from '../common/Button';
 import image from "../../public/Delivery/world-map.png";
 const Delivery = () => {
     return (

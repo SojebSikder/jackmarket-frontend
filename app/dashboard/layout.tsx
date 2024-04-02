@@ -1,9 +1,9 @@
 "use client";
-import DashboardNav from "./../../components/Dashboard/DashboardNav";
-import DashboardSideBar from "./../../components/Dashboard/DashboardSideBar";
-import Footer from "./../../components/common/Footer";
+import DashboardNav from "../../components/Dashboard/DashboardNav";
+import DashboardSideBar from "../../components/Dashboard/DashboardSideBar";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Footer from "@/components/common/Footer";
 const Dashboard = ({ children }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
   const pathname = usePathname();
@@ -19,11 +19,11 @@ const Dashboard = ({ children }) => {
           pathname={pathname}
         />
       </div>
-      <div className=" lg:ml-[240px]  min-h-screen bg-slate-300 lg:mt-[66px] p-5 ">
+      <div className=" lg:ml-[240px]  min-h-screen  lg:mt-[66px] p-5 ">
         {children}
       </div>
       <div className=" w-full  lg:pl-[200px] pl-5  ">
-        <Footer />
+        <Footer/>
       </div>
     </div>
   );

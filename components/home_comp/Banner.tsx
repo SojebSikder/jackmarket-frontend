@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "../../public/logo/jacmarketIcon.png";
-import Button from './../common/Button';
+import Button from '../common/Button';
 
 const Banner = () => {
   return (
