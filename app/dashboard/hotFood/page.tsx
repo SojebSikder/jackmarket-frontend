@@ -1,5 +1,7 @@
 
+
 const page = () => {
+
     return (
       <div>
         <h2>hotFood</h2>

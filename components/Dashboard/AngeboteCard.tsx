@@ -1,6 +1,7 @@
 import img1 from '../../public/Dashboard/anogebote/image (4).png'
 import icon from '../../public/Dashboard/anogebote/icon.png'
 import  Image  from 'next/image';
+import Link from 'next/link';
 const AngeboteCard = () => {
     return (
         <div className='w-44 '>
@@ -11,7 +12,7 @@ const AngeboteCard = () => {
                 <p className='absolute top-[2px] right-2 text-xs text-white font-bold'>- 0.72%</p>
                 <p className='absolute top-5 right-7 text-white font-semibold'>0.22€</p>
                 <p className='absolute top-[45px] right-7 text-[10px] text-white font-bold'> <del>0.72€</del></p>
-                <div className='bg-primary p-1 rounded-md w-8 absolute bottom-0 right-2 cursor-pointer active:scale-95 duration-200'><Image src={icon} alt='' className=' w-full object-cover ' /></div>
+                <Link href='/shoppingCard' className='bg-primary p-1 rounded-md w-8 absolute bottom-0 right-2 cursor-pointer active:scale-95 duration-200'><Image src={icon} alt='' className=' w-full object-cover ' /></Link>
             </div>
             <p>€1.32 <del className='text-gray-500'>€1.89</del></p>
             <h3 className=' font-semibold'>3Bears Pocket Porridge Mohnig...</h3>

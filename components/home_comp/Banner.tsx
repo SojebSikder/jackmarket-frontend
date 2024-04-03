@@ -1,6 +1,7 @@
 import Image from "next/image";
 import logo from "../../public/logo/jacmarketIcon.png";
 import Button from '../common/Button';
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -16,7 +17,7 @@ const Banner = () => {
           your door, and within minutes.{" "}
         </p>
 
-        <Button>Shop now</Button>
+        <Link href={'/dashboard'}><Button>Shop now</Button></Link>
         
 
       </div>
