@@ -32,7 +32,7 @@ const page = () => {
                             <span className=" absolute right-5 top-1  cursor-pointer text-2xl text-[#3994e4] " onClick={() => setShowPassword(!showPassword)}>{showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}</span>
                             
                                 <div className="flex justify-end text-xs ">
-                                    <a href="#" className="hover:underline text-primary">
+                                    <a href="/forgetPass" className="hover:underline text-primary">
                                         Forgot your Password?
                                     </a>
                                 </div>
