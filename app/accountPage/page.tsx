@@ -11,7 +11,7 @@ const page = () => {
             <div className=' flex items-center justify-center  w-full  lg:mt-28 ' >
                 <div className="  ">
                     <p className=" flex  text-sm text-gray-600 font-semibold"><Link href='/dashboard' className='underline'><IoIosArrowBack className="text-xl cursor-pointer" /> </Link>Back  </p>
-                    <h1 className='font-bold text-2xl my-4'>Let&apos;s get started</h1>
+                    <h1 className='font-bold text-3xl my-4'>Let&apos;s get started</h1>
                     <p className='mb-2'>To continue checking out, please sign into your <br /> Flink account. If you don&apos;t yet have an account, <br/> you can create one now.</p>
 
                     <div className='flex flex-col gap-3 mt-5'>
