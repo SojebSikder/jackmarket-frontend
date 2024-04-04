@@ -24,15 +24,15 @@ const page = () => {
         return () => clearInterval(intervalId);
     }, [nextSlider]);
     return (
-        <div>
+        <div className='lg:mt-0 mt-14'>
             {/*  */}
-            <p className=" flex  text-sm text-gray-500 "><Link href='/dashboard'>Home</Link> <IoIosArrowForward className="text-xl cursor-pointer" />Aufstriche & Cerealien <IoIosArrowForward className="text-xl cursor-pointer" />Musli-& Proteinriegel<IoIosArrowForward className="text-xl cursor-pointer" />3 Bears Pocket Porrifage mohinge Banane 55g </p>
+            <p className=" flex  text-sm text-gray-500 md:block hidden "><Link href='/dashboard'>Home</Link> <IoIosArrowForward className="text-xl cursor-pointer" />Aufstriche & Cerealien <IoIosArrowForward className="text-xl cursor-pointer" />Musli-& Proteinriegel<IoIosArrowForward className="text-xl cursor-pointer" />3 Bears Pocket Porrifage mohinge Banane 55g </p>
 
             {/* content  */}
 
             <div className=" lg:flex  gap-10 mt-10">
                 {/* left side */}
-                <div className="h-20 w-96 md:h-[470px] lg:h-full relative overflow-hidden ">
+                <div className="h-20 w-96  lg:h-[470px] h-[400px] lg:h-full relative overflow-hidden ">
 
                     {/* arrow right */}
                     <button onClick={nextSlider} className="absolute top-1/2 z-50 right-3  flex justify-center items-center rounded-full w-6 h-6 md:w-8 md:h-8">
