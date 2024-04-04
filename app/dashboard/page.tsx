@@ -6,7 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 const page = () => {
     return (
-        <div className="">
+        <div className="lg:mt-0 mt-14">
             {/* 1st card */}
             <div className=" flex justify-between">
                 <h1 className=" font-bold text-xl ">Angebote 💸</h1>
@@ -17,7 +17,7 @@ const page = () => {
                 </div>
 
             </div>
-            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-4">
+            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4">
                 <AngeboteCard />
                 <AngeboteCard />
                 <AngeboteCard />
@@ -36,7 +36,7 @@ const page = () => {
                 </div>
 
             </div>
-            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-4">
+            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4 ">
                 <AngeboteCard />
                 <AngeboteCard />
                 <AngeboteCard />
@@ -55,7 +55,7 @@ const page = () => {
                 </div>
 
             </div>
-            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5 my-4">
+            <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4">
                 <AngeboteCard />
                 <AngeboteCard />
                 <AngeboteCard />

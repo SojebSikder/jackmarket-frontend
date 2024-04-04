@@ -12,7 +12,7 @@ const page = () => {
     return (
         <div>
             <DashboardNav />
-            <div className=' flex items-center justify-center  w-full  lg:mt-12 ' >
+            <div className=' flex items-center justify-center  w-full  lg:mt-12 p-10' >
                 <div className=" lg:w-96 w-full  ">
                     <p className=" flex  text-sm text-gray-600 font-semibold"><Link href='/dashboard' className='underline'><IoIosArrowBack className="text-xl cursor-pointer" /> </Link>Back  </p>
                     <h1 className='font-bold text-3xl mt-4 mb-2'>Create an account</h1>

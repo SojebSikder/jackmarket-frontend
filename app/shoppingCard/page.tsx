@@ -27,7 +27,7 @@ const page = () => {
     return (
         <div>
             <DashboardNav />
-            <div className="px-10 py-5">
+            <div className="md:px-10 px-5 py-5">
                 <p className=" flex  text-sm text-gray-600 font-semibold"><Link href='/dashboard'></Link> <IoIosArrowBack className="text-xl cursor-pointer" />Continue shopping </p>
                 <h1 className=" font-bold text-2xl py-5">Shopping cart </h1>
                 <div className=" flex  items-center gap-5">
@@ -37,14 +37,15 @@ const page = () => {
 
                 </div>
                 {/* total card */}
-                <div className='flex  gap-5 justify-between mt-5'>
+                <div className='lg:flex  gap-5 justify-between mt-5'>
                     {/* 1st cart */}
 
-                    <div>
+                    <div  className=' over-flow-hidden'>
                         {/* header */}
-                        <div className=" flex items-center lg:gap-80 uppercase bg-gray-200 p-2 mt-5 rounded-md px-5 font-semibold text-gray-600">
+                        <div className=" flex items-center lg:gap-80 md:gap-44 gap-5  uppercase bg-gray-200 p-2 mt-5 rounded-md px-5 font-semibold text-gray-600 
+                        text-[8px] md:text-base">
                             <h3>YourItems (3)</h3>
-                            <div className=" flex items-center gap-8 ">
+                            <div className=" flex items-center  gap-2 md:gap-8 ">
                                 <h3>Quantity</h3>
                                 <h3>item Price </h3>
                                 <h3>items total</h3>
@@ -53,14 +54,14 @@ const page = () => {
                         {/* items */}
                         <div className="my-3 flex items-center gap-5 border-b border-black pb-3">
                             <Image src={item} alt="item" />
-                            <h2 className=" font-semibold ">Ben & Jerry's Chocolate Fudge Bronle 465ml</h2>
-                            <div className="flex items-center border-2 rounded-md gap-1 font-semibold w-28 justify-around">
+                            <h2 className=" font-semibold md:block hidden ">Ben & Jerry&lsquo;s Chocolate Fudge Bronle 465ml</h2>
+                            <div className="flex items-center border-2 rounded-md gap-1 font-semibold md:w-28 w-20 justify-around">
                                 <PiMinus onClick={handleMinusClick} className='cursor-pointer' />
                                 <p className="bg-primary p-1 px-3 text-white">{count}</p>
                                 <FiPlus onClick={handlePlusClick} className='cursor-pointer'  />
                             </div>
-                            <p className="text-lg pl-5">€6.79<span className="text-sm"><br /> €14.60 / 1l</span></p>
-                            <p className="text-lg pl-5">€13.58</p>
+                            <p className="md:text-lg text-xs md:pl-5 pl-1">€6.79<span className="text-sm"><br /> €14.60 / 1l</span></p>
+                            <p className="md:text-lg text-xs md:pl-5 ">€13.58</p>
 
                         </div>
                         <p className=" flex  text-sm text-gray-600 font-semibold"><Link href='/dashboard'></Link> <IoIosArrowBack className="text-xl cursor-pointer" />Continue shopping </p>
