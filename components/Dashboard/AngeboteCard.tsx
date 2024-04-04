@@ -4,7 +4,7 @@ import  Image  from 'next/image';
 import Link from 'next/link';
 const AngeboteCard = () => {
     return (
-        <div className='w-44 '>
+        <Link href={'/dashboard/productDetails'} className='w-44 '>
             <div className='relative overflow-hidden'>
                 <Image src={img1} alt='' className=' w-full object-cover ' />
                 <div className='bg-primary -skew-x-[16deg] w-12 h-16  absolute top-0 right-3  '></div>
@@ -17,7 +17,7 @@ const AngeboteCard = () => {
             <p>€1.32 <del className='text-gray-500'>€1.89</del></p>
             <h3 className=' font-semibold'>3Bears Pocket Porridge Mohnig...</h3>
             <p>€24.00 / 1kg</p>
-        </div>
+        </Link>
     );
 };
 
