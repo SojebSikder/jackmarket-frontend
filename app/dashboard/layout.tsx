@@ -9,10 +9,17 @@ const Dashboard = ({ children }) => {
   const pathname = usePathname();
   return (
     <div className=" relative font-inter">
-      <div className=" fixed top-0 w-full  z-20">
+      <div className=" fixed top-0 w-full  z-40">
         <DashboardNav />
       </div>
       <div className="hidden lg:block  fixed top-0 left-0 h-screen bg-white w-[240px] pt-[66px] z-10 ">
+        <DashboardSideBar
+          isActiveMenu={isActiveMenu}
+          setIsActiveMenu={setIsActiveMenu}
+          pathname={pathname}
+        />
+      </div>
+      <div className="block lg:hidden  fixed top-0 left-0 h-screen bg-white w-[240px] pt-[66px] z-10 ">
         <DashboardSideBar
           isActiveMenu={isActiveMenu}
           setIsActiveMenu={setIsActiveMenu}
