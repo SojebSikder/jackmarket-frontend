@@ -4,7 +4,7 @@ import DashboardSideBar from "../../components/Dashboard/DashboardSideBar";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/common/Footer";
-const Dashboard = ({ children }) => {
+const Dashboard = ({ children }: { children: any }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
   const pathname = usePathname();
   return (
@@ -30,7 +30,7 @@ const Dashboard = ({ children }) => {
         {children}
       </div>
       <div className=" w-full  lg:pl-[200px] pl-5  ">
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

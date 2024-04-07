@@ -1,7 +1,7 @@
 import img from '../../../public/icon (1).png'
 import SectionTitle from './../../../components/common/SectionTitle';
 import Image from "next/image";
-const page = () => {
+const Page = () => {
     return (
         <div> 
             <SectionTitle title={'Help & Contact'} shortDescription={'Need answers or contact our Customer Service? You have come to the right place!'}/>
@@ -26,4 +26,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

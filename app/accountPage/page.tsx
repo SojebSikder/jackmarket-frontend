@@ -4,7 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
 import DashboardNav from "@/components/Dashboard/DashboardNav";
 
-const page = () => {
+const Page = () => {
     return (
         <div>
             <DashboardNav/>
@@ -25,4 +25,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

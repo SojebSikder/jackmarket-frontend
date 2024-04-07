@@ -1,7 +1,7 @@
 
 import { AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-const page = () => {
+const Page = () => {
     return (
         <div className='  flex bg-gray-300 relative    '>
              <div className='  flex justify-between absolute top-0 right-2	'><AiOutlineClose className='-mt-5  text-2xl duration-200 active:scale-95'  /></div>
@@ -13,4 +13,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
