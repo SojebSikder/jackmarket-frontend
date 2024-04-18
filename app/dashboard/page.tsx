@@ -4,7 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
 
-const page = () => {
+const Page = () => {
     return (
         <div className="lg:mt-0 mt-14">
             {/* 1st card */}
@@ -69,4 +69,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

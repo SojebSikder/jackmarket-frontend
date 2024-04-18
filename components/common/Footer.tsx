@@ -2,9 +2,9 @@ import Image from 'next/image';
 import logo from "../../public/logo/jacmarketIcon.png";
 import googlePlayImage from "../../public/DownloadApp/googlePlay.png";
 import appleStore from "../../public/DownloadApp/appleStore.png";
-import facebook from "../../public/SocialIcon/Facebook 1.png";
-import instagram from "../../public/SocialIcon/Instagram 1.png";
-import linkedin from "../../public/SocialIcon/Linkedin 1.png";
+import facebook from "../../public/SocialIcon/Facebook_1.png";
+import instagram from "../../public/SocialIcon/Instagram_1.png";
+import linkedin from "../../public/SocialIcon/LinkedIn_1.png";
 
 const Footer = () => {
     return (

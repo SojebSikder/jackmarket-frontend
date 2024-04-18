@@ -14,7 +14,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 
 
 
-const page = () => {
+const Page = () => {
     const [count, setCount] = useState(2);
 
     const handleMinusClick = () => {
@@ -85,4 +85,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

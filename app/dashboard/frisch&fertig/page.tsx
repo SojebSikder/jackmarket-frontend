@@ -3,7 +3,7 @@ import AngeboteCard from "@/components/Dashboard/AngeboteCard";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
-const page = () => {
+const Page = () => {
     return (
         <div>
             <p className=" flex  text-sm text-gray-600 font-semibold"><Link href='/dashboard'>Home</Link> <IoIosArrowForward className="text-xl cursor-pointer" />Frisch & Fertig </p>
@@ -54,4 +54,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

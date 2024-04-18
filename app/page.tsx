@@ -10,7 +10,7 @@ import Footer from './../components/common/Footer';
 
 
 
-const page = () => {
+const Page = () => {
 
   return (
     <div className=" font-inter">
@@ -29,4 +29,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

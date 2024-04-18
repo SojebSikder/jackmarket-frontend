@@ -7,7 +7,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { useState } from "react";
 
-const page = () => {
+const Page = () => {
     const [showPassword, setShowPassword] = useState(false);
     return (
         <div>
@@ -54,4 +54,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
