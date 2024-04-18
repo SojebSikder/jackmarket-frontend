@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="bg-sPrimary h-screen lg:px-20 px-10 lg:pt-32 md:pt-20 pt-24 flex item-center justify-between lg:gap-96 ">
+    <div className="bg-sPrimary h-screen lg:px-20 px-5 lg:pt-32 md:pt-20 pt-24 flex item-center justify-between lg:gap-96 ">
       <div className=" flex-1">
         <Image src={logo} width={60} height={30} alt="logo" />
         <h1 className=" font-bold lg:text-5xl md:text-4xl text-2xl text-secondary lg:py-10 md:py-5 py-2 ">

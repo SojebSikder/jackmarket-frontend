@@ -18,7 +18,7 @@ const Essentials = () => {
             "Tap your way from aisle to aisle and order what you need, when you need it."
           }
         />
-        <div className=" grid lg:grid-cols-4 grid-cols-2 gap-5   md:px-32 px-10   py-10  text-center ">
+        <div className=" grid lg:grid-cols-4 grid-cols-2 gap-5   md:px-32 px-5   py-10  text-center ">
           <div>
             <Image src={image} alt="Alcohol-free Drinks" className="mx-auto" />
             <p className="my-2">Alcohol-free Drinks</p>

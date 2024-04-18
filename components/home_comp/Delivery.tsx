@@ -4,7 +4,7 @@ import Button from '../common/Button';
 import image from "../../public/Delivery/world-map.png";
 const Delivery = () => {
     return (
-      <div className=" md:flex justify-center items-center md:gap-32 lg:px-32 md:px-10 px-10 my-32">
+      <div className=" md:flex justify-center items-center md:gap-32 lg:px-32 md:px-10 px-5 my-32">
         <div className=" my-5 flex-1 ">
           <h1 className=" font-bold text-3xl text-secondary">
             You order, we deliver

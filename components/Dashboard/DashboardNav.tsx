@@ -3,6 +3,9 @@ import Image from "next/image";
 import logo from "../../public/logo/jacmarketIcon.png";
 import Link from "next/link"; // Import Link from next/link
 import { useEffect, useRef, useState } from 'react';
+import { IoMdMenu } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
+
 
 // icon in react icon
 import { SlInfo } from "react-icons/sl";
@@ -13,7 +16,7 @@ import { FaUserPlus } from "react-icons/fa6";
 import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 
-const DashboardNav = () => {
+const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
   const [dropDownState, setDropDownState] = useState(false);
     const dropDownMenuRef = useRef();
 
@@ -29,12 +32,25 @@ const DashboardNav = () => {
         };
     }, []);
   return (
-    <div className="h-full w-full flex items-center justify-between gap-6 bg-white shadow-md shadow-gray-300 py-2 px-10">
-      {/* Wrap Image component with Link component */}
-      <Link href="/">
+    <div className="h-full w-full flex items-center justify-between gap-6 bg-white shadow-md shadow-gray-300 py-2 px-5">
+
+     <div className='flex items-center gap-3'>
+
+      {/* menubar and close bar */}
+      {
+        isActiveMenu ? <IoMdMenu
+          onClick={() => setIsActiveMenu(!isActiveMenu)}
+          className=' text-3xl lg:hidden block'  /> :  <MdOutlineClose onClick={() => setIsActiveMenu(!isActiveMenu)}
+          className=' text-3xl lg:hidden block'   />
+      }
+       
+
+        {/* Wrap Image component with Link component */}
+        <Link href="/">
           {/* You need to use anchor tag inside Link */}
           <Image alt="logo" src={logo} className="w-10" />
-      </Link>
+        </Link>
+     </div>
        
        <div className=' flex items-center gap-10'>
  {/* search bar */}
@@ -54,7 +70,7 @@ const DashboardNav = () => {
 </form>
 
         {/* links */}
-       <div className=" flex items-center gap-4 ">
+       <div className=" flex items-center gap-4 hidden">
         <Link href='/dashboard/productDetails' className=' flex items-center gap-1'>
           <Image alt="logo" src={listIcon} className="w-5" />
             <span className=' text-sm'>My products</span>

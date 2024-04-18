@@ -7,8 +7,8 @@ import { AiOutlineClose } from "react-icons/ai";
 const DashboardSideBar = ({ isActiveMenu, setIsActiveMenu, pathname }) => {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="p-2">
-      <div onClick={() => setOpenModal(true)} className=" flex items-center  gap-1 shadow-md  shadow-gray-400 rounded cursor-pointer duration-200 active:scale-95">
+    <div className="p-2 ">
+      <div onClick={() => setOpenModal(true)} className=" flex items-center  gap-1 shadow-md  shadow-gray-400 rounded cursor-pointer duration-200 active:scale-95 overflow-y-auto">
         <h2 className=" text-blue-600 bg-gray-100 p-2 px-3 m-2 rounded-md font-bold text-xs text-center">
           12 <br /> min.
         </h2>
@@ -27,7 +27,7 @@ const DashboardSideBar = ({ isActiveMenu, setIsActiveMenu, pathname }) => {
           
           
 
-          <div className='  flex bg-white  md:h-96   '>
+          <div className='  flex bg-white  md:h-96    '>
             <div className='bg-[#fdd8e9] text-primary px-5 py-10 rounded-s-2xl '>
             <h1 className='text-2xl font-bold mb-6'>Enter your <br/> address</h1>
             <p>Get all your favorites <br/> delivered right to your <br/> door.</p>

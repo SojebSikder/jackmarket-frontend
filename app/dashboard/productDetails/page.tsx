@@ -8,7 +8,7 @@ import Button from "@/components/common/Button";
 import { Tabs } from "flowbite-react";
 
 
-const page = () => {
+const Page = () => {
 
 
     const [currentSlider, setCurrentSlider] =useState(0);
@@ -40,8 +40,8 @@ const page = () => {
                     </button>
                     {/* dots */}
                     <div className="flex justify-center items-center rounded-full z-[5] absolute bottom-4 w-full gap-1">
-                        {carouselImages.map((_, inx) => (
-                            <button key={_} onClick={() => setCurrentSlider(inx)} className={`rounded-full border-2 border-black duration-500 bg-white ${currentSlider === inx ? "w-5" : "wz-2"} h-3`}></button>
+                        {carouselImages.map((slide, inx) => (
+                            <button key={slide} onClick={() => setCurrentSlider(inx)} className={`rounded-full border-2 border-black duration-500 bg-white ${currentSlider === inx ? "w-5" : "wz-2"} h-3`}></button>
                         ))}
                     </div>
                     {/* Carousel container */}
@@ -98,4 +98,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
