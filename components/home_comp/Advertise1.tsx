@@ -4,7 +4,7 @@ import advertiseImage from "../../public/Advertisement/landingBanner.png";
 
 const Advertise1 = () => {
   return (
-    <div className=" w-full h-screen ">
+    <div className=" w-full md:h-screen ">
       <Image alt="" src={advertiseImage} className=" object-cover w-full h-full" />
     </div>
   );

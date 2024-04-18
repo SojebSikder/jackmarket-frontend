@@ -9,7 +9,7 @@ import linkedin from "../../public/SocialIcon/LinkedIn_1.png";
 const Footer = () => {
     return (
       <div className=" border-t  border-gray-500 md:pt-14 pt-10 pb-5 ">
-        <div className="md:px-20 px-10  md:flex items-start justify-between lg:gap-52">
+        <div className="md:px-20 px-5  md:flex items-start justify-between lg:gap-52">
           <Image
             src={logo}
             alt=" jacmarket Icon"
@@ -29,9 +29,9 @@ const Footer = () => {
               <h3 className=" font-semibold text-secondary text-xl pb-4">
                 Social
               </h3>
-              <div className="flex items-center gap-3">
+              <div className="md:flex items-center gap-3">
                 <Image src={facebook} alt="facebook Image" />
-                <Image src={linkedin} alt="linkedin image " />
+                <Image src={linkedin} alt="linkedin image " className='md:my-0 my-2' />
                 <Image src={instagram} alt="instagram image " />
               </div>
             </div>
@@ -53,7 +53,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" border-[0.1px] border-gray-400  md:mx-20 mx-10  my-4  "></div>
+        <div className=" border-[0.1px] border-gray-400  md:mx-20 mx-5  my-4  "></div>
         <div className='text-secondary md:flex items-center justify-center gap-5 font-semibold text-center'>
           <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>©  2022 Jeckmarket</p>
           <p className=' cursor-pointer hover:opacity-100 opacity-75 duration-200 active:scale-95 '>Imprint</p>

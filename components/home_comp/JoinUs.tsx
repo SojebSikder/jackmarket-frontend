@@ -20,12 +20,12 @@ const JoinUs = () => {
         </div>
         {/* main content*/}
         <div
-          className={` relative bg-[url('/JoinUs/bg_image.png')]  h-[50vh] md:h-screen w-full bg-cover bg-no-repeat flex justify-end overflow-hidden`}
+          className={` relative bg-[url('/JoinUs/bg_image.png')]  h-[40vh] md:h-screen w-full bg-cover bg-no-repeat flex justify-end overflow-hidden`}
         >
-          <div className="relative w-4/5  bg-[#002855] h-full -skew-x-[28deg] translate-x-[410px]"></div>
-          <div className=" absolute z-10 bottom-0 right-0 my-16 w-96 mx-20 text-end  text-white ">
-            <h1 className=" font-bold text-4xl  pb-5 ">Join us as a rider!</h1>
-            <p className="  font-medium text-white/50 mb-16">
+          <div className="relative w-4/5  bg-[#002855] h-full -skew-x-[28deg] lg:translate-x-[410px] md:translate-x-[200px] translate-x-[50px]"></div>
+          <div className=" absolute z-10 bottom-0 right-0 md:my-16 md:w-96 w-40 lg:mx-20 md:mx-5 mx-5 my-3 text-end  text-white ">
+            <h1 className=" font-bold lg:text-4xl md:text-3xl  md:pb-5 pb-2 ">Join us as a rider!</h1>
+            <p className="  font-medium text-white/50 md:mb-16 mb-3 md:text-sm text-[10px]">
               Benefit from an attractive hourly salary with tips, a discount on
               all groceries, free professional gear, subsidized phone data,
               bonus opportunities, and more.
