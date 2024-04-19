@@ -15,9 +15,12 @@ import listIcon from '../../public/Dashboard/navbar/profile-icon.png'
 import { FaUserPlus } from "react-icons/fa6";
 import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
+import { FaUser } from "react-icons/fa";
+
 
 const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
   const [dropDownState, setDropDownState] = useState(false);
+  const [userDrop, setUserDrop] = useState(false);
     const dropDownMenuRef = useRef();
 
     useEffect(() => {
@@ -70,7 +73,7 @@ const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
 </form>
 
         {/* links */}
-       <div className=" flex items-center gap-4 hidden">
+       <div className=" lg:flex items-center gap-4  hidden ">
         <Link href='/dashboard/productDetails' className=' flex items-center gap-1'>
           <Image alt="logo" src={listIcon} className="w-5" />
             <span className=' text-sm'>My products</span>
@@ -103,10 +106,62 @@ const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
           <SlInfo />
           <span className=' text-sm'>Help & contact</span>
         </Link>
-        <Link href='/dashboard/help&contact' className=' flex items-center gap-1 border border-black rounded-2xl p-2'>
+        <Link href='/shoppingCard' className=' flex items-center gap-1 border border-black rounded-2xl p-2'>
           <BsCart4 />
           <span className=' text-sm'>Basket</span>
         </Link>
+       </div>
+
+
+                {/* mobile view  */}
+       <div className='block lg:hidden relative' ref={dropDownMenuRef}>
+        <button onClick={() => setUserDrop(!userDrop)} className="relative flex items-center gap-1 py-2 ">
+                    
+                    <FaUser className='text-2xl cursor-pointer' />
+                </button>
+          {
+            userDrop && (
+              <div className="absolute lg:flex items-center gap-4   top-12 right-2 z-10 space-y-2 rounded  bg-white  p-2 text-gray-700 w-52 border">
+        <Link href='/dashboard/productDetails' className=' flex items-center gap-1'>
+          <Image alt="logo" src={listIcon} className="w-5" />
+            <span className=' text-sm'>My products</span>
+        </Link>
+        <Link href='#'  className=' flex items-center gap-1'>
+          <LuUser2 />
+          
+
+          <div className="relative" ref={dropDownMenuRef}>
+                <button onClick={() => setDropDownState(!dropDownState)} className="relative flex items-center gap-1 py-2 ">
+                    <span>My account</span>
+                    
+                </button>
+                {dropDownState && (
+                    <ul className="absolute top-10 right-0 z-10 space-y-2 rounded  bg-white  p-2 text-gray-700 w-52 border">
+                        <li className="px-3 hover:underline">
+                            <Link href="/register" className=' flex items-center gap-1 border-b pb-2'> <FaUserPlus /> <span className=' text-sm'>Create account / Log In</span></Link>
+                        </li>
+                        <li className="px-3 hover:underline">
+                            <Link href="#" className=' flex items-center gap-1 border-b pb-2 '><FaQuestion /> <span className=' text-sm'>FAQ</span></Link>
+                        </li>
+                        <li className="px-3 hover:underline">
+                            <Link href="#" className=' flex items-center gap-1 '><TiMessages /> <span className=' text-sm'>Need Help?</span></Link>
+                        </li>
+                    </ul>
+                )}
+            </div>
+        </Link>
+        <Link href='/dashboard/help&contact' className=' flex items-center gap-1'>
+          <SlInfo />
+          <span className=' text-sm'>Help & contact</span>
+        </Link>
+        <Link href='/shoppingCard' className=' flex items-center gap-1 border border-black rounded-2xl p-2'>
+          <BsCart4 />
+          <span className=' text-sm'>Basket</span>
+        </Link>
+       </div>
+            )
+          }
+
        </div>
        </div>
     

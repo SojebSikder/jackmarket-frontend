@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Footer from "@/components/common/Footer";
 
 const Dashboard = ({ children }: { children: any }) => {
-  const [isActiveMenu, setIsActiveMenu] = useState(false);
+  const [isActiveMenu, setIsActiveMenu] = useState(true);
 
   const pathname = usePathname();
 
@@ -28,7 +28,7 @@ const Dashboard = ({ children }: { children: any }) => {
         />
       </div>
       {/* Conditional rendering of DashboardSideBar */}
-      <div className={`lg:hidden block fixed top-0  h-screen bg-white/10 md:w-[240px] w-full pt-[66px] z-20 transition-all duration-300 overflow-y-auto ${isActiveMenu ? 'hidden' : 'block'}`}>
+      <div className={`lg:hidden block fixed top-0  h-screen bg-white md:w-[240px] w-full pt-[66px] z-20 transition-all duration-300 overflow-y-auto ${isActiveMenu ? 'hidden' : 'block'}`}>
         <DashboardSideBar
           isActiveMenu={isActiveMenu}
           setIsActiveMenu={setIsActiveMenu}
