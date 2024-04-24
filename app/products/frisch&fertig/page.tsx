@@ -1,5 +1,5 @@
 
-import AngeboteCard from "@/components/Dashboard/AngeboteCard";
+import ProductCard from "@/components/Dashboard/ProductCard";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
@@ -23,12 +23,12 @@ const Page = () => {
 
             </div>
             <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4">
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
                 
             </div>
             {/* 2nd card */}
@@ -42,12 +42,12 @@ const Page = () => {
 
             </div>
             <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4 mb-10">
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
-                <AngeboteCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
                 
             </div>
         </div>

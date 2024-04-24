@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "../../public/logo/jacmarketIcon.png";
-import Button from '../common/Button';
+import Button from "../common/Button";
 import Link from "next/link";
 
 const Banner = () => {
@@ -17,9 +17,9 @@ const Banner = () => {
           your door, and within minutes.{" "}
         </p>
 
-        <Link href={'/dashboard'}><Button>Shop now</Button></Link>
-        
-
+        <Link href={"/products"}>
+          <Button>Shop now</Button>
+        </Link>
       </div>
       <div className=" md:flex-1"></div>
     </div>
