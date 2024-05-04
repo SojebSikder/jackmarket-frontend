@@ -16,7 +16,13 @@ import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { FaUser } from "react-icons/fa";
 
-const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
+const DashboardNav = ({
+  isActiveMenu,
+  setIsActiveMenu,
+}: {
+  isActiveMenu?: any;
+  setIsActiveMenu?: any;
+}) => {
   const [dropDownState, setDropDownState] = useState(false);
   const [userDrop, setUserDrop] = useState(false);
   const dropDownMenuRef = useRef();
@@ -114,7 +120,7 @@ const DashboardNav = ({ isActiveMenu, setIsActiveMenu }) => {
                 <ul className="absolute top-10 left-0 z-10 space-y-2 rounded  bg-white  p-2 text-gray-700 w-52 border">
                   <li className="px-3 hover:underline">
                     <Link
-                      href="/register"
+                      href="/account"
                       className=" flex items-center gap-1 border-b pb-2"
                     >
                       {" "}

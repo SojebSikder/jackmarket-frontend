@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { UserService } from "@/service/user/user.service";
 import { useRouter } from "next/navigation";
 import { CustomToast } from "@/utils/Toast/CustomToast";
+import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,12 +29,12 @@ const Page = () => {
     const lname = e.target.lname.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
+    // const confirmPassword = e.target.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-      setErrorMessage("Password and Confirm Password not match");
-      return;
-    }
+    // if (password !== confirmPassword) {
+    //   setErrorMessage("Password and Confirm Password not match");
+    //   return;
+    // }
 
     const data = {
       fname: fname,
@@ -91,9 +92,9 @@ const Page = () => {
           {loading && <div>Please wait...</div>}
           {/* {message && <Alert type={"success"}>{message}</Alert>}
           {errorMessage && <Alert type={"danger"}>{errorMessage}</Alert>} */}
-
+          <CustomToastContainer />
           {/* Input fields and the form started */}
-          <form onSubmit={handleRegister} action="" className="space-y-6 mt-4">
+          <form onSubmit={handleRegister} className="space-y-6 mt-4">
             <div className=" text-sm flex items-center gap-3">
               <input
                 type="text"
