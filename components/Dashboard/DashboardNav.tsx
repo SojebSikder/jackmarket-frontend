@@ -19,9 +19,11 @@ import { FaUser } from "react-icons/fa";
 const DashboardNav = ({
   isActiveMenu,
   setIsActiveMenu,
+  isLoggedIn,
 }: {
   isActiveMenu?: any;
   setIsActiveMenu?: any;
+  isLoggedIn?: any;
 }) => {
   const [dropDownState, setDropDownState] = useState(false);
   const [userDrop, setUserDrop] = useState(false);
@@ -118,16 +120,31 @@ const DashboardNav = ({
               </button>
               {dropDownState && (
                 <ul className="absolute top-10 left-0 z-10 space-y-2 rounded  bg-white  p-2 text-gray-700 w-52 border">
-                  <li className="px-3 hover:underline">
-                    <Link
-                      href="/account"
-                      className=" flex items-center gap-1 border-b pb-2"
-                    >
-                      {" "}
-                      <FaUserPlus />{" "}
-                      <span className=" text-sm">Create account / Log In</span>
-                    </Link>
-                  </li>
+                  {isLoggedIn ? (
+                    <li className="px-3 hover:underline">
+                      <Link
+                        href="/profile"
+                        className=" flex items-center gap-1 border-b pb-2"
+                      >
+                        {" "}
+                        <FaUserPlus /> <span className=" text-sm">Profile</span>
+                      </Link>
+                    </li>
+                  ) : (
+                    <li className="px-3 hover:underline">
+                      <Link
+                        href="/account"
+                        className=" flex items-center gap-1 border-b pb-2"
+                      >
+                        {" "}
+                        <FaUserPlus />{" "}
+                        <span className=" text-sm">
+                          Create account / Log In
+                        </span>
+                      </Link>
+                    </li>
+                  )}
+
                   <li className="px-3 hover:underline">
                     <Link
                       href="#"
