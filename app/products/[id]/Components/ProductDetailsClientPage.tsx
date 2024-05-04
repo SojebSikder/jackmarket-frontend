@@ -1,16 +1,27 @@
 "use client";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
-import productImg from "../../../../public/Dashboard/ShoppingCart/image (8).png";
-import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Button from "@/components/common/Button";
 import { Tabs } from "flowbite-react";
-import { StringHelper } from "@/helper/string.helper";
+import CustomImage from "@/components/common/CustomImage";
+import { FiPlus } from "react-icons/fi";
+import { PiMinus } from "react-icons/pi";
+import { CartService } from "@/service/cart/cart.service";
+import { CustomToast } from "@/utils/Toast/CustomToast";
+import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 
 const ProductDetailsClientPage = ({ product }: { product: any }) => {
+  const [message, setMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const toastId = useRef<any>(null);
+
+  const [count, setCount] = useState(1);
   const [currentSlider, setCurrentSlider] = useState(0);
-  const carouselImages = [productImg, productImg, productImg, productImg];
+
+  const carouselImages = product.images;
+
   const prevSlider = () =>
     setCurrentSlider((currentSlider) =>
       currentSlider === 0 ? carouselImages.length - 1 : currentSlider - 1
@@ -23,6 +34,53 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
     [carouselImages.length]
   );
 
+  const handleMinusClick = () => {
+    // setCount(count - 1);
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
+  const handlePlusClick = () => {
+    setCount(count + 1);
+  };
+
+  const addToCart = async () => {
+    toastId.current = CustomToast.show("Please wait...");
+
+    const data = {
+      product_id: Number(product.id),
+      // variant_id: ,
+      quantity: count,
+    };
+
+    try {
+      const cartService = await CartService.store(data);
+      const response = cartService.data;
+      if (response.success) {
+        setMessage(response.message);
+        setLoading(false);
+
+        CustomToast.update(toastId.current, response.message);
+      } else {
+        setErrorMessage(response.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, response.message);
+      }
+    } catch (error: any) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.response.data.message);
+      } else {
+        setErrorMessage(error.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.message);
+      }
+    }
+  };
+
   // if you don't want to change the slider automatically then you can just remove the useEffect
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -30,8 +88,10 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
     }, 3000);
     return () => clearInterval(intervalId);
   }, [nextSlider]);
+
   return (
     <div className="lg:mt-0 mt-14">
+      <CustomToastContainer />
       {/*  */}
       <p className=" md:flex hidden  text-sm text-gray-500   ">
         <Link href="/dashboard">Home</Link>{" "}
@@ -57,7 +117,7 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
           </button>
           {/* dots */}
           <div className="flex justify-center items-center rounded-full z-[5] absolute bottom-4 w-full gap-1">
-            {carouselImages.map((slide, inx) => (
+            {carouselImages.map((slide: any, inx: number) => (
               <button
                 key={slide}
                 onClick={() => setCurrentSlider(inx)}
@@ -73,12 +133,12 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
             style={{ transform: `translateX(-${currentSlider * 100}%)` }}
           >
             {/* sliders */}
-            {carouselImages.map((slide, inx) => (
-              <Image
-                key={slide}
-                src={slide}
+            {carouselImages.map((slide: any) => (
+              <CustomImage
+                key={slide.id}
+                src={slide.image_url}
                 className=" object-cover"
-                alt={"product image "}
+                alt={`${slide.alt_text}`}
               />
             ))}
           </div>
@@ -98,8 +158,13 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
             </del>
           </p>
           {/* <p className="text-sm text-gray-500">€24,00 / 1kg</p> */}
+          <div className="mt-7 flex items-center border-2 rounded-md gap-1 font-semibold md:w-28 w-20 justify-around">
+            <PiMinus onClick={handleMinusClick} className="cursor-pointer" />
+            <p className="bg-primary p-1 px-3 text-white">{count}</p>
+            <FiPlus onClick={handlePlusClick} className="cursor-pointer" />
+          </div>
           <div className="mt-7">
-            <Button>{" Add Item "}</Button>
+            <Button onClick={addToCart}>{" Add Item "}</Button>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ import { useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const CartClientPage = ({ isLoggedIn }: { isLoggedIn?: any }) => {
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(1);
   const [openModal, setOpenModal] = useState(false);
 
   const handleMinusClick = () => {

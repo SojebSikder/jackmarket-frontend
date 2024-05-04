@@ -171,7 +171,7 @@ const DashboardNav = ({
             <span className=" text-sm">Help & contact</span>
           </Link>
           <Link
-            href="/shoppingCard"
+            href="/cart"
             className=" flex items-center gap-1 border border-black rounded-2xl p-2"
           >
             <BsCart4 />
