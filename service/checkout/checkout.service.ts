@@ -7,29 +7,18 @@ const config = {
   },
 };
 
-export const CartService = {
-  findAll: async ({ token = "", context = null }) => {
-    // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
-    const _config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userToken,
-      },
-    };
-
-    return await Fetch.get(`/cart`, _config);
-  },
-
+export const CheckoutService = {
   store: async ({
-    product_id,
-    variant_id,
-    quantity,
+    shipping_zone_id,
+    fname,
+    lname,
+    email,
     context = null,
   }: {
-    product_id: number;
-    variant_id?: number;
-    quantity: number;
+    shipping_zone_id: number;
+    fname?: string;
+    lname: string;
+    email: string;
     context?: any;
   }) => {
     const userToken = CookieHelper.get({ key: "token", context });
@@ -41,12 +30,13 @@ export const CartService = {
     };
 
     const data = {
-      product_id,
-      variant_id,
-      quantity,
+      shipping_zone_id,
+      fname,
+      lname,
+      email,
     };
 
-    return await Fetch.post(`/cart`, data, _config);
+    return await Fetch.post(`/checkout`, data, _config);
   },
 
   update: async (
