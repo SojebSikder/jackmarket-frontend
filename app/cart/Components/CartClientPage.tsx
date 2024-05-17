@@ -124,11 +124,12 @@ const CartClientPage = ({
       <DashboardNav isLoggedIn={isLoggedIn} />
       <CustomToastContainer />
       <div className="md:px-10 px-5 py-5">
-        <p className=" flex  text-sm text-gray-600 font-semibold">
-          <Link href="/dashboard"></Link>{" "}
-          <IoIosArrowBack className="text-xl cursor-pointer" />
-          Continue shopping{" "}
-        </p>
+        <Link href="/products">
+          <p className=" flex  text-sm text-gray-600 font-semibold">
+            <IoIosArrowBack className="text-xl cursor-pointer" />
+            Continue shopping{" "}
+          </p>
+        </Link>
         <h1 className=" font-bold text-2xl py-5">Shopping cart </h1>
         <div className=" flex  items-center gap-5">
           <Link href="#">
@@ -195,11 +196,12 @@ const CartClientPage = ({
 
             {/* end items */}
 
-            <p className=" flex  text-sm text-gray-600 font-semibold">
-              <Link href="/dashboard"></Link>{" "}
-              <IoIosArrowBack className="text-xl cursor-pointer" />
-              Continue shopping{" "}
-            </p>
+            <Link href="/products">
+              <p className=" flex  text-sm text-gray-600 font-semibold">
+                <IoIosArrowBack className="text-xl cursor-pointer" />
+                Continue shopping
+              </p>
+            </Link>
           </div>
 
           {/* 2nd cart */}

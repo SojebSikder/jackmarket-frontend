@@ -81,6 +81,9 @@ const CheckoutClientPage = ({
       if (response.success) {
         setLoading(false);
         CustomToast.update(toastId.current, response.message);
+        if (response.redirect) {
+          window.location.replace(response.redirect_url);
+        }
       } else {
         setLoading(false);
         CustomToast.update(toastId.current, response.message);
