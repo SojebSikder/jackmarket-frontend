@@ -13,6 +13,7 @@ import { CustomToast } from "@/utils/Toast/CustomToast";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { CartService } from "@/service/cart/cart.service";
 import { CheckoutService } from "@/service/checkout/checkout.service";
+import { useRouter } from "next/navigation";
 
 const CartClientPage = ({
   cartData,
@@ -23,6 +24,7 @@ const CartClientPage = ({
   shippingData: any;
   isLoggedIn?: any;
 }) => {
+  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -100,6 +102,7 @@ const CartClientPage = ({
       if (response.success) {
         setLoading(false);
         CustomToast.update(toastId.current, response.message);
+        router.push(`/checkout/${response.data.checkout_id}`);
       } else {
         setLoading(false);
         CustomToast.update(toastId.current, response.message);
@@ -224,7 +227,7 @@ const CartClientPage = ({
                 <span>Total</span>{" "}
                 <span>
                   {cartData.currency_sign}
-                  {cartData.order_total}
+                  {cartData.total}
                 </span>{" "}
               </h3>
               <p className="text-gray-500 text-xs mt-2">incl. VAT</p>
