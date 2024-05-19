@@ -154,14 +154,14 @@ const DashboardNav = ({
 
                   <li className="px-3 hover:underline">
                     <Link
-                      href="#"
+                      href="/faq"
                       className=" flex items-center gap-1 border-b pb-2 "
                     >
                       <FaQuestion /> <span className=" text-sm">FAQ</span>
                     </Link>
                   </li>
                   <li className="px-3 hover:underline">
-                    <Link href="#" className=" flex items-center gap-1 ">
+                    <Link href="/help" className=" flex items-center gap-1 ">
                       <TiMessages />{" "}
                       <span className=" text-sm">Need Help?</span>
                     </Link>
