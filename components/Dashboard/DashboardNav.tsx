@@ -15,6 +15,7 @@ import { FaUserPlus } from "react-icons/fa6";
 import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { FaUser } from "react-icons/fa";
+import { CookieHelper } from "@/helper/cookie.helper";
 
 const DashboardNav = ({
   isActiveMenu,
@@ -43,6 +44,12 @@ const DashboardNav = ({
   //     document.removeEventListener("mousedown", closeDropDown);
   //   };
   // }, []);
+
+  const handleLogout = () => {
+    CookieHelper.destroy({ key: "token" });
+    window.location.reload();
+  };
+
   return (
     <div className="h-full w-full flex items-center justify-between gap-6 bg-white shadow-md shadow-gray-300 py-2 px-5">
       <div className="flex items-center gap-3">
@@ -159,6 +166,19 @@ const DashboardNav = ({
                       <span className=" text-sm">Need Help?</span>
                     </Link>
                   </li>
+
+                  {isLoggedIn ? (
+                    <li className="px-3 hover:underline">
+                      <button
+                        onClick={handleLogout}
+                        className=" flex items-center gap-1 border-b pb-2"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  ) : (
+                    <></>
+                  )}
                 </ul>
               )}
             </div>
