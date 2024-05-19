@@ -183,10 +183,7 @@ const DashboardNav = ({
               )}
             </div>
           </Link>
-          <Link
-            href="/dashboard/help&contact"
-            className=" flex items-center gap-1"
-          >
+          <Link href="/help" className=" flex items-center gap-1">
             <SlInfo />
             <span className=" text-sm">Help & contact</span>
           </Link>

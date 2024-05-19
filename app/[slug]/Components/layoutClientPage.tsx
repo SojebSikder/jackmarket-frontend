@@ -8,9 +8,11 @@ import Footer from "@/components/common/Footer";
 const LayoutClientPage = ({
   children,
   isLoggedIn,
+  footerData,
 }: {
   children: any;
   isLoggedIn: any;
+  footerData: any;
 }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(true);
 
@@ -54,7 +56,7 @@ const LayoutClientPage = ({
       </div>
 
       <div className="w-full lg:pl-[200px] pl-5">
-        <Footer />
+        <Footer footerData={footerData} />
       </div>
     </div>
   );
