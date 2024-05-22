@@ -23,12 +23,12 @@ const Page = () => {
 
             </div>
             <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4">
+                {/* <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard /> */}
                 
             </div>
             {/* 2nd card */}
@@ -42,12 +42,12 @@ const Page = () => {
 
             </div>
             <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4 mb-10">
+                {/* <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard /> */}
                 
             </div>
         </div>

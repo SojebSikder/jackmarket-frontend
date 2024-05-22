@@ -9,10 +9,12 @@ const LayoutClientPage = ({
   children,
   isLoggedIn,
   footerData,
+  categoryData,
 }: {
   children: any;
   isLoggedIn: any;
   footerData: any;
+  categoryData: any;
 }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(true);
 
@@ -36,6 +38,7 @@ const LayoutClientPage = ({
           isActiveMenu={isActiveMenu}
           setIsActiveMenu={setIsActiveMenu}
           pathname={pathname}
+          categoryData={categoryData}
         />
       </div>
       {/* Conditional rendering of DashboardSideBar */}
@@ -48,6 +51,7 @@ const LayoutClientPage = ({
           isActiveMenu={isActiveMenu}
           setIsActiveMenu={setIsActiveMenu}
           pathname={pathname}
+          categoryData={categoryData}
         />
       </div>
 
