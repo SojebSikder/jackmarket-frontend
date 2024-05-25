@@ -93,7 +93,7 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
     <div className="lg:mt-0 mt-14">
       <CustomToastContainer />
       {/*  */}
-      <p className=" md:flex hidden  text-sm text-gray-500   ">
+      {/* <p className=" md:flex hidden  text-sm text-gray-500   ">
         <Link href="/dashboard">Home</Link>{" "}
         <IoIosArrowForward className="text-xl cursor-pointer" />
         Aufstriche & Cerealien{" "}
@@ -101,7 +101,7 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
         Musli-& Proteinriegel
         <IoIosArrowForward className="text-xl cursor-pointer" />3 Bears Pocket
         Porrifage mohinge Banane 55g{" "}
-      </p>
+      </p> */}
 
       {/* content  */}
 

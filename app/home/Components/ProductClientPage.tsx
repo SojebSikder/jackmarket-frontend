@@ -1,4 +1,5 @@
 import ProductCard from "@/components/Dashboard/ProductCard";
+import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -13,8 +14,11 @@ const ProductClientPage = ({ productData }: { productData: any }) => {
               <div className=" flex justify-between">
                 <h1 className=" font-bold text-xl ">{category.name}</h1>
                 <div className="flex items-center gap-2 mt-5">
-                  <IoIosArrowBack className="text-xl cursor-pointer" />
-                  <IoIosArrowForward className="text-xl cursor-pointer" />
+                  {/* <IoIosArrowBack className="text-xl cursor-pointer" />
+                  <IoIosArrowForward className="text-xl cursor-pointer" /> */}
+                  <Link href={`/products/category=${category.id}`}>
+                    View all
+                  </Link>
                 </div>
               </div>
               <div className=" grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-5 my-4">
