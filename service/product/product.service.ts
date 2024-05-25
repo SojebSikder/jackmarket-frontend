@@ -7,14 +7,12 @@ const config = {
 };
 
 export const ProductService = {
-  findAll: async (page: number = 1) => {
-    return await Fetch.get(`/product?page=${page}`, config);
+  findAll: async (query = "") => {
+    // return await Fetch.get(`/product?page=${page}`, config);
+    return await Fetch.get(`/product${query}`, config);
   },
   findAllProductWithCategories: async (page: number = 1) => {
-    return await Fetch.get(
-      `/product/productWithCategory?page=${page}`,
-      config
-    );
+    return await Fetch.get(`/product/productWithCategory?page=${page}`, config);
   },
   findOne: async (id: number) => {
     return await Fetch.get(`/product/${id}`, config);

@@ -17,7 +17,7 @@ const Banner = () => {
           your door, and within minutes.{" "}
         </p>
 
-        <Link href={"/products"}>
+        <Link href={"/home"}>
           <Button>Shop now</Button>
         </Link>
       </div>
