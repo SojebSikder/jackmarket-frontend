@@ -13,7 +13,7 @@ const NavLinks = ({ pathname, isActiveMenu, categoryData }) => {
   const [dropDownState, setDropDownState] = useState(false);
   return (
     <div className="pl-2 py-4">
-      <Link href="/">
+      <Link href="/home">
         <div className="flex items-center gap-2 pb-7 hover:tracking-[0.1em] duration-200 hover:scale-95  ">
           <Image src={HomeIcon} alt="Home icon" /> Home
         </div>

@@ -12,7 +12,7 @@ const DashboardSideBar = ({
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className="p-2 ">
-      <div
+      {/* <div
         onClick={() => setOpenModal(true)}
         className=" flex items-center  gap-1 shadow-md  shadow-gray-400 rounded cursor-pointer duration-200 active:scale-95 overflow-y-auto"
       >
@@ -27,7 +27,7 @@ const DashboardSideBar = ({
             Add delivery address
           </p>
         </div>
-      </div>
+      </div> */}
       {/* modal */}
       <div
         onClick={() => setOpenModal(false)}

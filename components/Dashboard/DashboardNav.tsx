@@ -76,11 +76,12 @@ const DashboardNav = ({
       <div className=" flex items-center gap-10">
         {/* search bar */}
 
-        <form className="flex ">
+        <form method="get" action={"/search"} className="flex ">
           <div className="relative w-full">
             <input
               type="search"
               id="search-dropdown"
+              name="q"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-lg   border border-gray-300 lg:pr-52 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-primary"
               placeholder="Bread, milk, eggs..."
             />
