@@ -16,6 +16,8 @@ import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { FaUser } from "react-icons/fa";
 import { CookieHelper } from "@/helper/cookie.helper";
+import { UtilHelper } from "@/helper/util.helper";
+import { ProductService } from "@/service/product/product.service";
 
 const DashboardNav = ({
   isActiveMenu,
@@ -44,6 +46,50 @@ const DashboardNav = ({
   //     document.removeEventListener("mousedown", closeDropDown);
   //   };
   // }, []);
+
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  const [products, setProducts] = useState();
+  const [searchSuccess, setSearchSuccess] = useState(false);
+
+  const searchProduct = async (value: string) => {
+    try {
+      const response = await ProductService.search(value);
+      // console.log(response.data.data.data);
+
+      setProducts(response.data.data.data);
+      setSearchSuccess(true);
+    } catch (error) {
+      setSearchSuccess(false);
+    }
+  };
+
+  const handleOnInput = (e: any) => {
+    if (e.target.value) {
+      setSearchText(e.target.value);
+      setShowSearch(true);
+      searchProduct(e.target.value);
+    } else {
+      setShowSearch(false);
+    }
+  };
+  const showResult = UtilHelper.debounce(handleOnInput, 300);
+
+  const handleOnClick = (e) => {
+    if (!searchText) {
+      return alert("Enter query to search");
+    }
+    window.location.href = `/search?q=${searchText}`;
+  };
+  const handleOnEnter = (e) => {
+    if (e.key === "Enter") {
+      if (!searchText) {
+        return alert("Enter query to search");
+      }
+      window.location.href = `/search?q=${searchText}`;
+    }
+  };
 
   const handleLogout = () => {
     CookieHelper.destroy({ key: "token" });
@@ -76,17 +122,20 @@ const DashboardNav = ({
       <div className=" flex items-center gap-10">
         {/* search bar */}
 
-        <form method="get" action={"/search"} className="flex ">
+        <form className="flex ">
           <div className="relative w-full">
             <input
               type="search"
               id="search-dropdown"
               name="q"
+              onInput={(e) => showResult(e)}
+              onKeyUp={handleOnEnter}
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-lg   border border-gray-300 lg:pr-52 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-primary"
               placeholder="Bread, milk, eggs..."
             />
             <button
-              type="submit"
+              type="button"
+              onClick={handleOnClick}
               className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-primary rounded-e-lg border border-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-primary  dark:hover:bg-primary dark:focus:ring-primary "
             >
               <svg
@@ -106,9 +155,48 @@ const DashboardNav = ({
             </button>
           </div>
         </form>
+        <div
+          style={{ display: !showSearch && "none" }}
+          className="absolute max-md:top-[43px] top-[52px]  z-[200] bg-white border-[#e5e5e5] border"
+        >
+          <div className="list-search pt-[15px] max-h-[400px] scrollbar-hide overflow-auto">
+            <ul>
+              {searchSuccess && products.length > 0 ? (
+                products.map((item: any, i) => (
+                  <li key={i}>
+                    <a
+                      href={`/products/${item.id}`}
+                      className="flex items-center p-[5px_15px] border-b border-[#e5e5e5]"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element*/}
+                      <img
+                        src={item.images.length > 0 && item.images[0].image_url}
+                        width="65"
+                        height="65"
+                        alt="img"
+                        className="mr-[15px]"
+                      />
+                      <p className="text-[12px]">{item.name}</p>
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <li>Item not found</li>
+              )}
+            </ul>
+          </div>
+          {/* <div className="bottom-btn w-full p-[15px_54px] border-t border-[#e5e5e5]">
+            <button
+              onClick={handleOnClick}
+              className="text-[13px] font-medium p-[10px_15px] border border-black w-full hover:bg-black hover:text-white delay-50 transition-all"
+            >
+              SEE ALL {">"}
+            </button>
+          </div> */}
+        </div>
 
         {/* links */}
-        <div className=" lg:flex items-center gap-4  hidden ">
+        <div className="lg:flex items-center gap-4 hidden ">
           <Link
             href="/dashboard/productDetails"
             className=" flex items-center gap-1"
