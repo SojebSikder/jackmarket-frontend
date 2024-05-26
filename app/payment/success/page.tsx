@@ -1,5 +1,8 @@
 import React from "react";
+import ClientSuccessPage from "./Components/ClientSuccessPage";
+import { AuthHelper } from "@/helper/auth.helper";
 
-export default function Page() {
-  return <div>Payment successfull</div>;
+export default async function Page() {
+  const isLoggedIn = await AuthHelper.checkLoggedIn();
+  return <ClientSuccessPage isLoggedIn={isLoggedIn} />;
 }
