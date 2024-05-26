@@ -217,15 +217,28 @@ const DashboardNav = ({
               {dropDownState && (
                 <ul className="absolute top-10 left-0 z-10 space-y-2 rounded  bg-white  p-2 text-gray-700 w-52 border">
                   {isLoggedIn ? (
-                    <li className="px-3 hover:underline">
-                      <Link
-                        href="/profile"
-                        className=" flex items-center gap-1 border-b pb-2"
-                      >
-                        {" "}
-                        <FaUserPlus /> <span className=" text-sm">Profile</span>
-                      </Link>
-                    </li>
+                    <>
+                      <li className="px-3 hover:underline">
+                        <Link
+                          href="/profile"
+                          className=" flex items-center gap-1 border-b pb-2"
+                        >
+                          {" "}
+                          <FaUserPlus />{" "}
+                          <span className=" text-sm">Profile</span>
+                        </Link>
+                      </li>
+                      <li className="px-3 hover:underline">
+                        <Link
+                          href="/myorder"
+                          className=" flex items-center gap-1 border-b pb-2"
+                        >
+                          {" "}
+                          <FaUserPlus />{" "}
+                          <span className=" text-sm">My order</span>
+                        </Link>
+                      </li>
+                    </>
                   ) : (
                     <li className="px-3 hover:underline">
                       <Link

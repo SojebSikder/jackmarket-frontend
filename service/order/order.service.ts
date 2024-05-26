@@ -8,6 +8,25 @@ const config = {
 };
 
 export const OrderService = {
+  findAll: async ({
+    token,
+    context = null,
+  }: {
+    token?: string;
+    context?: any;
+  }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/order`, _config);
+  },
+
   findOne: async ({
     order_id,
     token,
@@ -28,6 +47,7 @@ export const OrderService = {
 
     return await Fetch.get(`/order/${order_id}`, _config);
   },
+
   store: async ({
     checkout_id,
     shipping_fname,
@@ -115,5 +135,33 @@ export const OrderService = {
     };
 
     return await Fetch.post(`/order`, data, _config);
+  },
+
+  pay: async ({
+    order_id,
+    payment_provider_id,
+    token,
+    context = null,
+  }: {
+    order_id: number;
+    payment_provider_id: number;
+    token?: string;
+    context?: any;
+  }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    const data = {
+      order_id,
+      payment_provider_id,
+    };
+
+    return await Fetch.post(`/payment/pay`, data, _config);
   },
 };
