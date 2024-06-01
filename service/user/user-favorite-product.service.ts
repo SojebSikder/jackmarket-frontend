@@ -41,4 +41,16 @@ export const UserFavoriteProductService = {
 
     return await Fetch.post(`/user-favorite-product`, data, _config);
   },
+
+  delete: async ({ id, context = null }: { id: number; context?: any }) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.delete(`/user-favorite-product/${id}`, _config);
+  },
 };

@@ -5,7 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useRef, useState } from "react";
 import { CustomToast } from "@/utils/Toast/CustomToast";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
-import { OrderService } from "@/service/order/order.service";
+import { UserFavoriteProductService } from "@/service/user/user-favorite-product.service";
 
 const MyProductClientPage = ({
   userFavoriteProductData,
@@ -17,12 +17,14 @@ const MyProductClientPage = ({
   const [loading, setLoading] = useState(false);
   const toastId = useRef<any>(null);
 
-  const handlePayment = async (
-    e: any,
-    order_id: number,
-    payment_provider_id: number
-  ) => {
+  const handleDeleteFavorite = async (e: any, id: number) => {
     e.preventDefault();
+
+    const confirm = window.confirm("Are you sure you want to delete?");
+    if (!confirm) {
+      return;
+    }
+
     if (loading === true) {
       return;
     }
@@ -30,14 +32,11 @@ const MyProductClientPage = ({
 
     toastId.current = CustomToast.show("Please wait...");
 
-    const data = {
-      order_id: order_id,
-      payment_provider_id: payment_provider_id,
-    };
-
     try {
-      const orderService = await OrderService.pay(data);
-      const response = orderService.data;
+      const userFavoriteProductService =
+        await UserFavoriteProductService.delete({ id: id });
+      const response = userFavoriteProductService.data;
+
       if (response.success) {
         setLoading(false);
         CustomToast.update(toastId.current, response.message);
@@ -87,6 +86,9 @@ const MyProductClientPage = ({
                     <th scope="col" className="px-6 py-3">
                       Price
                     </th>
+                    <th scope="col" className="px-6 py-3">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,6 +112,19 @@ const MyProductClientPage = ({
                           <td className="px-6 py-4">
                             {userFavoriteProduct.product.currency_sign}
                             {userFavoriteProduct.product.new_price}
+                          </td>
+                          <td className="px-6 py-4">
+                            <button
+                              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                              onClick={(e) =>
+                                handleDeleteFavorite(
+                                  e,
+                                  userFavoriteProduct.product.id
+                                )
+                              }
+                            >
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       );
