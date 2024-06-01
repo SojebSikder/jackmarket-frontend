@@ -6,7 +6,7 @@ export const AppConfig = () => ({
   app: {
     // server endpoint
     url: URL,
-    name: "Sitename",
+    name: "Jeckmarket",
     // api endpoint
     apiUrl: `${URL}/api`,
   },
