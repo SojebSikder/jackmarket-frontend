@@ -1,6 +1,4 @@
 import ProductCard from "@/components/Dashboard/ProductCard";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
 
 const ProductClientPage = ({ productData }: { productData: any }) => {
   return (

@@ -11,7 +11,7 @@ import { SlInfo } from "react-icons/sl";
 import { BsCart4 } from "react-icons/bs";
 import { LuUser2 } from "react-icons/lu";
 import listIcon from "../../public/Dashboard/navbar/profile-icon.png";
-import { FaUserPlus } from "react-icons/fa6";
+import { FaUserPlus, FaFirstOrder } from "react-icons/fa6";
 import { FaQuestion } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { FaUser } from "react-icons/fa";
@@ -197,13 +197,15 @@ const DashboardNav = ({
 
         {/* links */}
         <div className="lg:flex items-center gap-4 hidden ">
-          <Link
-            href="/dashboard/productDetails"
-            className=" flex items-center gap-1"
-          >
-            <Image alt="logo" src={listIcon} className="w-5" />
-            <span className=" text-sm">My products</span>
-          </Link>
+          {isLoggedIn ? (
+            <Link href="/myproduct" className=" flex items-center gap-1">
+              <Image alt="logo" src={listIcon} className="w-5" />
+              <span className=" text-sm">My products</span>
+            </Link>
+          ) : (
+            <></>
+          )}
+
           <Link href="#" className=" flex items-center gap-1">
             <LuUser2 />
 
@@ -234,7 +236,7 @@ const DashboardNav = ({
                           className=" flex items-center gap-1 border-b pb-2"
                         >
                           {" "}
-                          <FaUserPlus />{" "}
+                          <FaFirstOrder />{" "}
                           <span className=" text-sm">My order</span>
                         </Link>
                       </li>

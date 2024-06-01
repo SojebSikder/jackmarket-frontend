@@ -10,6 +10,7 @@ import { PiMinus } from "react-icons/pi";
 import { CartService } from "@/service/cart/cart.service";
 import { CustomToast } from "@/utils/Toast/CustomToast";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
+import { UserFavoriteProductService } from "@/service/user/user-favorite-product.service";
 
 const ProductDetailsClientPage = ({ product }: { product: any }) => {
   const [message, setMessage] = useState(null);
@@ -57,6 +58,42 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
     try {
       const cartService = await CartService.store(data);
       const response = cartService.data;
+      if (response.success) {
+        setMessage(response.message);
+        setLoading(false);
+
+        CustomToast.update(toastId.current, response.message);
+      } else {
+        setErrorMessage(response.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, response.message);
+      }
+    } catch (error: any) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.response.data.message);
+      } else {
+        setErrorMessage(error.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.message);
+      }
+    }
+  };
+
+  const addToFavorite = async () => {
+    toastId.current = CustomToast.show("Please wait...");
+
+    const data = {
+      product_id: Number(product.id),
+    };
+
+    try {
+      const userFavoriteProductService = await UserFavoriteProductService.store(
+        data
+      );
+      const response = userFavoriteProductService.data;
       if (response.success) {
         setMessage(response.message);
         setLoading(false);
@@ -163,8 +200,16 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
             <p className="bg-primary p-1 px-3 text-white">{count}</p>
             <FiPlus onClick={handlePlusClick} className="cursor-pointer" />
           </div>
-          <div className="mt-7">
-            <Button onClick={addToCart}>{" Add Item "}</Button>
+
+          <div className="flex">
+            <div className="mt-7 mr-4">
+              <Button onClick={addToCart}>{" Add Item "}</Button>
+            </div>
+            <div className="mt-7">
+              <Button color="bg-secondary" onClick={addToFavorite}>
+                {" Add to Favorite "}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
