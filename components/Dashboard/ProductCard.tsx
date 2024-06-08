@@ -12,9 +12,11 @@ const ProductCard = ({ product }: { product: any }) => {
       <div className="relative overflow-hidden">
         <CustomImage
           src={`${product.images[0].image_url}`}
+          style={{ height: "300px", width: "300px" }}
+          height={300}
+          width={300}
           alt=""
-          className="w-full object-contain "
-          // className=" w-full object-cover "
+          // className="w-full object-contain "
         />
         {/* <div className="bg-primary -skew-x-[16deg] w-12 h-16  absolute top-0 right-3  "></div>
         <div className="bg-secondary -skew-x-[17deg] w-16 h-6  absolute top-5 right-5  "></div>

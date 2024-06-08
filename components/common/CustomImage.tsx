@@ -8,6 +8,7 @@ export default function CustomImage({
   height = 100,
   loading = "lazy",
   layout = "responsive",
+  style = {},
   ...props
 }) {
   const shimmer = (w: any, h: any) => `
@@ -32,11 +33,12 @@ export default function CustomImage({
     <Image
       src={src}
       alt={alt}
+      style={style}
       loading="lazy"
       width={width}
       height={height}
       unoptimized={false}
-      layout={layout}
+      // layout={layout}
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(
         shimmer(width, height)
