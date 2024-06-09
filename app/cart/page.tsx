@@ -4,6 +4,7 @@ import { CartService } from "@/service/cart/cart.service";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ShippingService } from "@/service/shipping/shipping.service";
+import { UserService } from "@/service/user/user.service";
 
 const Page = async () => {
   const isLoggedIn = await AuthHelper.checkLoggedIn();
@@ -12,11 +13,18 @@ const Page = async () => {
     redirect("/login");
   }
 
+  let userDetails;
   let cartData;
   let shippingData;
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("token");
+
+    const userService = await UserService.getUserDetails({
+      token: token?.value,
+    });
+
+    userDetails = userService.data;
 
     // fetch cart info
     const cartService = await CartService.findAll({
@@ -31,6 +39,7 @@ const Page = async () => {
 
   return (
     <CartClientPage
+      userDetails={userDetails}
       cartData={cartData}
       shippingData={shippingData.data}
       isLoggedIn={isLoggedIn}

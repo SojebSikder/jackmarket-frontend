@@ -16,10 +16,12 @@ import { CheckoutService } from "@/service/checkout/checkout.service";
 import { useRouter } from "next/navigation";
 
 const CartClientPage = ({
+  userDetails,
   cartData,
   shippingData,
   isLoggedIn,
 }: {
+  userDetails: any;
   cartData: any;
   shippingData: any;
   isLoggedIn?: any;
@@ -332,6 +334,7 @@ const CartClientPage = ({
                         name="fname"
                         id="fname"
                         placeholder="First name"
+                        defaultValue={userDetails.data.fname}
                         className="w-full mb-2 px-4 py-3  border border-gray-300 bg-white   "
                       />
                     </div>
@@ -341,6 +344,7 @@ const CartClientPage = ({
                         name="lname"
                         id="lname"
                         placeholder="Last name"
+                        defaultValue={userDetails.data.lname}
                         className="w-full mb-2 px-4 py-3  border border-gray-300 bg-white   "
                       />
                     </div>
@@ -350,6 +354,7 @@ const CartClientPage = ({
                         name="email"
                         id="email"
                         placeholder="Email"
+                        defaultValue={userDetails.data.email}
                         className="w-full mb-2 px-4 py-3  border border-gray-300 bg-white   "
                       />
                     </div>
