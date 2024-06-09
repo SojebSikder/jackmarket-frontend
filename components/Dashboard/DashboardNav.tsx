@@ -119,9 +119,8 @@ const DashboardNav = ({
         </Link>
       </div>
 
-      <div className="flex items-center gap-10">
+      <div>
         {/* search bar */}
-
         <form className="flex ">
           <div className="relative w-full">
             <input
@@ -155,6 +154,9 @@ const DashboardNav = ({
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="flex items-center gap-10">
         <div
           style={{ display: !showSearch && "none" }}
           className="absolute max-md:top-[43px] top-[52px]  z-[200] bg-white border-[#e5e5e5] border"
