@@ -131,7 +131,7 @@ const CartClientPage = ({
           </p>
         </Link>
         <h1 className=" font-bold text-2xl py-5">Shopping cart </h1>
-        <div className=" flex  items-center gap-5">
+        {/* <div className=" flex  items-center gap-5">
           <Link href="#">
             <button className=" p-2 bg-primary text-white  flex gap-2 items-center rounded-md active:scale-95 duration-200 ">
               <Image src={cycleIcon} alt="logo" /> Delivery
@@ -142,7 +142,7 @@ const CartClientPage = ({
               <Image src={busket} alt="logo" /> Click & Collect
             </button>
           </Link>
-        </div>
+        </div> */}
         {/* total card */}
         <div className="lg:flex  gap-5 justify-between mt-5">
           {/* 1st cart */}

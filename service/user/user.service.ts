@@ -106,31 +106,11 @@ export const UserService = {
     {
       fname,
       lname,
-      date_of_birth,
-      city,
-      country,
-      organization,
-      recipient_name,
-      recipient_zip_code,
-      recipient_country,
-      recipient_state,
-      recipient_city,
-      recipient_address,
-      recipient_phone_number,
+      email,
     }: {
-      fname: string;
-      lname: string;
-      date_of_birth: string;
-      city: string;
-      country: string;
-      organization: string;
-      recipient_name: string;
-      recipient_zip_code: string;
-      recipient_country: string;
-      recipient_state: string;
-      recipient_city: string;
-      recipient_address: string;
-      recipient_phone_number: string;
+      fname?: string;
+      lname?: string;
+      email?: string;
     },
     context = null
   ) => {
@@ -146,20 +126,10 @@ export const UserService = {
     const data = {
       fname: fname,
       lname: lname,
-      date_of_birth: date_of_birth,
-      city: city,
-      country: country,
-      organization: organization,
-      recipient_name: recipient_name,
-      recipient_zip_code: recipient_zip_code,
-      recipient_country: recipient_country,
-      recipient_state: recipient_state,
-      recipient_city: recipient_city,
-      recipient_address: recipient_address,
-      recipient_phone_number: recipient_phone_number,
+      email: email,
     };
 
-    return await Fetch.patch(`/user`, data, _config);
+    return await Fetch.put(`/user/update`, data, _config);
   },
 
   updateAvatar: async (data: any, context = null) => {

@@ -119,7 +119,7 @@ const DashboardNav = ({
         </Link>
       </div>
 
-      <div className=" flex items-center gap-10">
+      <div className="flex items-center gap-10">
         {/* search bar */}
 
         <form className="flex ">
