@@ -213,6 +213,10 @@ const ProductDetailsClientPage = ({ product }: { product: any }) => {
           </div>
         </div>
       </div>
+      {/* description */}
+      <div className="mt-14 mb-32 ">
+        <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
+      </div>
       {/* tabs */}
       <div className="mt-14 mb-32 ">
         <Tabs style="underline">

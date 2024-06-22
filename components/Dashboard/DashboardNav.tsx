@@ -119,7 +119,7 @@ const DashboardNav = ({
         </Link>
       </div>
 
-      <div>
+      <div className="w-1/2">
         {/* search bar */}
         <form className="flex ">
           <div className="relative w-full">
