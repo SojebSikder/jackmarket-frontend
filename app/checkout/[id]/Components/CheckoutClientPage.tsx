@@ -105,11 +105,12 @@ const CheckoutClientPage = ({
       <DashboardNav isLoggedIn={isLoggedIn} />
       <CustomToastContainer />
       <div className="md:px-10 px-5 py-5">
-        <p className=" flex  text-sm text-gray-600 font-semibold">
-          <Link href="/dashboard"></Link>{" "}
-          <IoIosArrowBack className="text-xl cursor-pointer" />
-          Continue shopping{" "}
-        </p>
+        <Link href="/home">
+          <p className=" flex  text-sm text-gray-600 font-semibold">
+            <IoIosArrowBack className="text-xl cursor-pointer" />
+            Continue shopping
+          </p>
+        </Link>
         <h1 className=" font-bold text-2xl py-5">Checkout</h1>
         {/* total card */}
         <form onSubmit={handleOrder}>

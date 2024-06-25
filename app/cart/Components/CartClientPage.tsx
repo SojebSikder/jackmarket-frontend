@@ -163,7 +163,7 @@ const CartClientPage = ({
       <DashboardNav isLoggedIn={isLoggedIn} />
       <CustomToastContainer />
       <div className="md:px-10 px-5 py-5">
-        <Link href="/products">
+        <Link href="/home">
           <p className=" flex  text-sm text-gray-600 font-semibold">
             <IoIosArrowBack className="text-xl cursor-pointer" />
             Continue shopping{" "}
@@ -235,7 +235,7 @@ const CartClientPage = ({
 
             {/* end items */}
 
-            <Link href="/products">
+            <Link href="/home">
               <p className=" flex  text-sm text-gray-600 font-semibold">
                 <IoIosArrowBack className="text-xl cursor-pointer" />
                 Continue shopping
