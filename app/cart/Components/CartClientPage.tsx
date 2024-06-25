@@ -37,7 +37,44 @@ const CartClientPage = ({
   const [shipping_zone_price, setShipping_zone_price] = useState(
     shippingData.shipping_zones[0].price
   );
+
+  const [couponCode, setCouponCode] = useState();
+
   const toastId = useRef<any>(null);
+
+  const applyCoupon = async () => {
+    toastId.current = CustomToast.show("Please wait...");
+
+    const data = {
+      code: couponCode,
+    };
+
+    try {
+      const cartService = await CartService.applyCoupon(data);
+      const response = cartService.data;
+      if (response.success) {
+        setMessage(response.message);
+        setLoading(false);
+
+        CustomToast.update(toastId.current, response.message);
+      } else {
+        setErrorMessage(response.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, response.message);
+      }
+    } catch (error: any) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.response.data.message);
+      } else {
+        setErrorMessage(error.message);
+        setLoading(false);
+        CustomToast.update(toastId.current, error.message);
+      }
+    }
+  };
 
   const updateCart = async (
     id: number,
@@ -217,6 +254,21 @@ const CartClientPage = ({
                   {cartData.subtotal}
                 </span>{" "}
               </h3>
+              {/* discount */}
+              <h3 className="flex items-center justify-between font-semibold">
+                {" "}
+                <span>Discount</span>{" "}
+                {cartData.coupon_discounted.map((coupon: any, key) => {
+                  return (
+                    <span key={key}>
+                      -
+                      {coupon.amount_type === "percentage"
+                        ? coupon.amount + "%"
+                        : cartData.currency_sign}
+                    </span>
+                  );
+                })}
+              </h3>
               {/* <h3 className="flex items-center justify-between py-3 ">
                 <span>Deposit</span> <span>€37.58</span>{" "}
               </h3> */}
@@ -236,6 +288,28 @@ const CartClientPage = ({
               </h3>
               <p className="text-gray-500 text-xs mt-2">incl. VAT</p>
             </div>
+
+            <div className="flex justify-between">
+              <div className="text-sm">
+                <input
+                  type="text"
+                  name="couponCode"
+                  id="couponCode"
+                  placeholder="Coupon"
+                  onChange={(e: any) => setCouponCode(e.target.value)}
+                  className="mt-4 mb-2 px-4 py-3  border border-gray-300 bg-white   "
+                />
+              </div>
+              <div>
+                <button
+                  onClick={applyCoupon}
+                  className="bg-blue-500 p-3 text-white rounded-md mt-4 font-semibold"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+
             <button
               onClick={() => setOpenModal(true)}
               className="bg-primary p-3 text-white w-full rounded-md mt-4 font-semibold"
@@ -300,18 +374,18 @@ const CartClientPage = ({
                   <div className="  p-3 rounded-md">
                     <h3 className="flex items-center justify-between font-semibold text-gray-500">
                       {" "}
-                      <span>Subtotal</span>{" "}
+                      <span>Total</span>{" "}
                       <span>
                         {cartData.currency_sign}
-                        {cartData.subtotal}
+                        {cartData.total}
                       </span>{" "}
                     </h3>
                     <h3 className="flex items-center justify-between font-semibold text-gray-500">
                       {" "}
-                      <span>Total</span>{" "}
+                      <span>Total with shipping fee</span>{" "}
                       <span>
                         {cartData.currency_sign}
-                        {Number(cartData.subtotal) +
+                        {Number(cartData.total) +
                           Number(shipping_zone_price)}
                       </span>{" "}
                     </h3>

@@ -1,3 +1,4 @@
+import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import ProductCard from "@/components/Dashboard/ProductCard";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
@@ -10,6 +11,7 @@ const ProductClientPage = ({ productData }: { productData: any }) => {
       {productData.data.map((category: any) => {
         return (
           <>
+            <CustomToastContainer />
             <div key={category.id}>
               <div className=" flex justify-between">
                 <h1 className=" font-bold text-xl ">{category.name}</h1>

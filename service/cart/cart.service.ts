@@ -79,4 +79,26 @@ export const CartService = {
 
     return await Fetch.put(`/cart/${id}`, data, _config);
   },
+
+  // apply coupon
+  applyCoupon: async ({
+    code,
+    context = null,
+  }: {
+    code: string;
+    context: any;
+  }) => {
+    const userToken = CookieHelper.get({ key: "token", context });
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    const data = {
+      code: code,
+    };
+    return await Fetch.post(`/coupon`, data, _config);
+  },
 };

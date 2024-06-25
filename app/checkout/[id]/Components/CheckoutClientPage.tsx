@@ -274,6 +274,21 @@ const CheckoutClientPage = ({
                     {checkoutData.subtotal}
                   </span>{" "}
                 </h3>
+                {/* discount */}
+                <h3 className="flex items-center justify-between font-semibold">
+                  {" "}
+                  <span>Discount</span>{" "}
+                  {checkoutData.coupon_discounted.map((coupon: any, key) => {
+                    return (
+                      <span key={key}>
+                        -
+                        {coupon.amount_type === "percentage"
+                          ? coupon.amount + "%"
+                          : checkoutData.currency_sign}
+                      </span>
+                    );
+                  })}
+                </h3>
                 <h3 className="flex items-center justify-between border-b border-gray-400 pb-4 ">
                   <span className="flex items-center gap-1 ">
                     Delivery fee{" "}
@@ -297,7 +312,7 @@ const CheckoutClientPage = ({
                   <span>Total</span>{" "}
                   <span>
                     {checkoutData.data.currency_sign}
-                    {checkoutData.total + Number(shippingData.price)}
+                    {Number(checkoutData.total) + Number(shippingData.price)}
                   </span>{" "}
                 </h3>
                 <p className="text-gray-500 text-xs mt-2">incl. VAT</p>
