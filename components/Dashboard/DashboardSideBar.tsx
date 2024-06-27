@@ -2,6 +2,8 @@ import NavLinks from "./NavLinks";
 import { useState } from "react";
 import { GrFormSearch } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
+import { LocaltionManager } from "@/utils/LocationManager";
+import { CookieHelper } from "@/helper/cookie.helper";
 
 const DashboardSideBar = ({
   isActiveMenu,
@@ -10,6 +12,19 @@ const DashboardSideBar = ({
   categoryData,
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [locationImageUrl, setLocationImageUrl] = useState();
+
+  const [address, setAddress] = useState(CookieHelper.get({ key: "address1" }));
+
+  const getCurrentLocation = () => {
+    LocaltionManager.getLocation(setLocationImageUrl);
+  };
+
+  const handleAddressInputChange = (e: any) => {
+    CookieHelper.set({ key: "address1", value: e.target.value });
+    setAddress(e.target.value);
+  };
+
   return (
     <div className="p-2 ">
       <div
@@ -17,7 +32,7 @@ const DashboardSideBar = ({
         className=" flex items-center  gap-1 shadow-md  shadow-gray-400 rounded cursor-pointer duration-200 active:scale-95 overflow-y-auto"
       >
         <h2 className=" text-blue-600 bg-gray-100 p-2 px-3 m-2 rounded-md font-bold text-xs text-center">
-          12 <br /> min.
+          {/* 12 <br /> min. */}
         </h2>
         <div>
           <p className=" font-semibold text-gray-400 text-[12px] pb-1 ">
@@ -82,15 +97,20 @@ const DashboardSideBar = ({
                     id="default-search"
                     className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-800  bg-gray-50 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                     placeholder="Enter your delivery address"
+                    value={address}
+                    onChange={handleAddressInputChange}
                   />
                 </div>
               </form>
-              <h3 className="font-semibold pl-4 mt-4">
-                Use my current location
-              </h3>
-              <p className=" pl-4 text-base text-gray-600">
-                Use my current location
-              </p>
+              {/* <button onClick={getCurrentLocation}>
+                <h3 className="font-semibold pl-4 mt-4">
+                  Use my current location
+                </h3>
+                <p className=" pl-4 text-base text-gray-600">
+                  Use my current location
+                </p>
+              </button>
+              <img src={locationImageUrl} /> */}
             </div>
           </div>
         </div>

@@ -10,4 +10,7 @@ export const AppConfig = () => ({
     // api endpoint
     apiUrl: `${URL}/api`,
   },
+  map: {
+    key: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY || "",
+  },
 });

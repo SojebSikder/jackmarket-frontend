@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { CustomToast } from "@/utils/Toast/CustomToast";
 import CustomToastContainer from "@/components/CustomToast/CustomToastContainer";
 import { OrderService } from "@/service/order/order.service";
+import { CookieHelper } from "@/helper/cookie.helper";
 
 const CheckoutClientPage = ({
   checkoutData,
@@ -22,6 +23,8 @@ const CheckoutClientPage = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const toastId = useRef<any>(null);
+
+  const cookieAddress1 = CookieHelper.get({ key: "address1" });
 
   const handleOrder = async (e: any) => {
     e.preventDefault();
@@ -204,6 +207,7 @@ const CheckoutClientPage = ({
                     id="shipping_address1"
                     placeholder="Address 1"
                     className="w-full mb-2 px-4 py-3  border border-gray-300 bg-white   "
+                    defaultValue={cookieAddress1}
                   />
                 </div>
                 <div className="space-y-2 text-sm">
